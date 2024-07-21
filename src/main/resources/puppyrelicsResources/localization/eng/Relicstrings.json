@@ -1,0 +1,77 @@
+{
+  "puppyrelics:AdventureCatsHat": {
+    "NAME": "Adventure Cat's Hat",
+    "FLAVOR": "A hat that grants an adventurer's spirit.",
+    "DESCRIPTIONS": [
+      "Whenever you play a #ySkill, gain #yBlock equal to the amount of #ySkills played this turn."
+    ]
+  },
+  "puppyrelics:NinjaPuppysMask": {
+    "NAME": "Ninja Puppy's Mask",
+    "FLAVOR": "A mask that grants a ninja's technique.",
+    "DESCRIPTIONS": [
+      "Every time you play #b3 #yAttacks in a single turn, apply #b2 #yConstrict to a random enemy."
+    ]
+  },
+  "puppyrelics:AdventurersMap": {
+    "NAME": "Adventurer's Map",
+    "FLAVOR": "Whether fighting or exploring, you can find what you need!",
+    "DESCRIPTIONS": [
+      "When entering a #y? Room, receive a card reward."
+    ]
+  },
+  "puppyrelics:MonsterDrops": {
+    "NAME": "Monster Drops",
+    "FLAVOR": "Monsters now drop hearts and gold when defeated, enjoy your spoils.",
+    "DESCRIPTIONS": [
+      "When a non-minion enemy is slain, heal #b2 HP and gain #y5 gold."
+    ]
+  },
+  "puppyrelics:CatsPajamas": {
+    "NAME": "Cat's Pajamas",
+    "FLAVOR": "The power of nine lives in some silky pajamas.",
+    "DESCRIPTIONS": [
+      "Upon entering a #yRest #ySite, heal and gain gold equal to #b9 times the act number."
+    ]
+  },
+  "puppyrelics:DogsDay": {
+    "NAME": "Dog's Day",
+    "FLAVOR": "Every dog has its day.",
+    "DESCRIPTIONS": [
+      "When your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, and draw #b3 additional cards."
+    ]
+  },
+  "puppyrelics:Hyperactivity": {
+    "NAME": "Hyperactivity",
+    "FLAVOR": "Sure, you're exhausted, but there's still a small burst of energy you can eke out.",
+    "DESCRIPTIONS": [
+      "Whenever you exhaust #b4 cards, gain 1 energy."
+    ]
+  },
+  "puppyrelics:NikTheGOAT": {
+    "NAME": "Nik The GOAT",
+    "FLAVOR": "Pet the goat, the goat can always be relied on to help you when you need it, just ask.",
+    "DESCRIPTIONS": [
+      "Right-click to select a card to #yExhaust. Gain [E] equal to its cost once per turn.",
+      "You exhausted ",
+      " for ",
+      " [E] energy."
+    ]
+  },
+  "puppyrelics:AgmensHat": {
+    "NAME": "Agmen's Hat",
+    "FLAVOR": "Always be yourself, unless you can be a pirate. Then always be a pirate.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, deal #b3 damage to all enemies. If the damage kills an enemy, gain #y10 gold."
+    ]
+  },
+  "puppyrelics:MoneyBush": {
+    "NAME": "Money Bush",
+    "FLAVOR": "Because money doesn't grow on trees.",
+    "DESCRIPTIONS": [
+      "Whenever you climb a floor, gain #y5 gold. Upon pickup, this benefit is retroactive. (#y5 gold)",
+      "Whenever you climb a floor, gain #y5 gold. You have gained #y",
+      "[] gold."
+    ]
+  }
+}
