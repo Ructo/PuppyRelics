@@ -73,5 +73,77 @@
       "Whenever you climb a floor, gain #y5 gold. You have gained #y",
       "[] gold."
     ]
+  },
+  "puppyrelics:BlessingInDisguise": {
+    "NAME": "Blessing In Disguise",
+    "DESCRIPTIONS": [
+      "The first #yCurse or #yStatus drawn each turn is #yExhausted. Gain [E] and draw a card."
+    ]
+  },
+  "puppyrelics:OneStone": {
+    "NAME": "One Stone",
+    "DESCRIPTIONS": [
+      "If you end your turn with #b1 card in your hand, gain [E] and draw a card next turn."
+    ]
+  },
+  "puppyrelics:KnuckleDown": {
+    "NAME": "Knuckle Down",
+    "DESCRIPTIONS": [
+      "If you play #b3 #ySkills in a turn, remove a random debuff stack from yourself."
+    ]
+  },
+  "puppyrelics:TheBold": {
+    "NAME": "The Bold",
+    "DESCRIPTIONS": [
+      "Whenever you enter a #y? Room, gain #b1 Max HP."
+    ]
+  },
+  "puppyrelics:FireWithFIRE": {
+    "NAME": "Fire with FIRE",
+    "DESCRIPTIONS": [
+      "Whenever you draw a #yCurse or #yStatus, deal #b6 damage to all enemies."
+    ]
+  },
+  "puppyrelics:DevilsAdvocate": {
+    "NAME": "Devil's Advocate",
+    "DESCRIPTIONS": [
+      "After taking damage, heal for #b25% of the next damage dealt."
+    ]
+  },
+  "puppyrelics:GreenerGrass": {
+    "NAME": "Greener Grass",
+    "DESCRIPTIONS": [
+      "Double the first #yBuff you gain each turn."
+    ]
+  },
+  "puppyrelics:UnturnedStone": {
+    "NAME": "Unturned Stone",
+    "DESCRIPTIONS": [
+      "Whenever your hand, draw pile, or discard pile is empty, deal #b7 damage to all enemies."
+    ]
+  },
+  "puppyrelics:BiggerThumb": {
+    "NAME": "Bigger Thumb",
+    "DESCRIPTIONS": [
+      "At the start of each turn, apply #yFeeble to the highest health monster."
+    ]
+  },
+  "puppyrelics:HangInThere": {
+    "NAME": "Hang In There",
+    "DESCRIPTIONS": [
+      "Whenever you enter a #y? Room, heal #b6 HP."
+    ]
+  },
+  "puppyrelics:DarklightsStone": {
+    "NAME": "Darklight's Stone",
+    "DESCRIPTIONS": [
+      "This relic evolves based on the number of card upgrades performed.",
+      "Upgrades 3: Draw 1 additional card at the start of each combat.",
+      "Upgrades 6: Gain 1 Strength.",
+      "Upgrades 9: Gain 1 Dexterity.",
+      "Upgrades 12: Gain 2 Energy at the start of each combat.",
+      " upgrades needed for next stage."
+    ]
   }
 }
+
