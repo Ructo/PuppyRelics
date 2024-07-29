@@ -59,5 +59,10 @@
   "${ModID}:MultiCardPreviewAndDrawCallback": {
     "NAME": "Previews and Callbacks",
     "DESCRIPTION": "{@@}Shuffle *Smite{!Upgrades!|>0=+} and *Safety{!Upgrades!|>0=+} into your draw pile. NL Draw 1 card. NL If it's Colorless, deal !D! damage to ALL enemies."
+  },
+  "${ModID}:RatRaceCard": {
+    "NAME": "Rat Race",
+    "DESCRIPTION": "Ethereal. NL Gain [E]. NL Add a Wound to your draw pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Gain [E]. NL Add a Wound to your draw pile. NL Exhaust."
   }
 }

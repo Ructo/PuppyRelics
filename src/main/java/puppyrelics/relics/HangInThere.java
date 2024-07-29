@@ -1,10 +1,10 @@
 package puppyrelics.relics;
 
-import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.actions.common.HealAction;
 
 import static puppyrelics.ModFile.makeID;
 
@@ -19,7 +19,7 @@ public class HangInThere extends AbstractEasyRelic {
     public void onEnterRoom(AbstractRoom room) {
         if (room instanceof EventRoom) {
             flash();
-            AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, AbstractDungeon.player, 6));
+            AbstractDungeon.player.heal(6);
         }
     }
 

@@ -1,16 +1,16 @@
 package puppyrelics.relics;
 
+import com.evacipated.cardcrawl.mod.stslib.relics.OnReceivePowerRelic;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 
 import static puppyrelics.ModFile.makeID;
 
-public class GreenerGrass extends AbstractEasyRelic {
+public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRelic {
     public static final String ID = makeID("GreenerGrass");
-    private boolean triggeredThisTurn = false;
+    private boolean doubledThisTurn = false;
 
     public GreenerGrass() {
         super(ID, RelicTier.RARE, LandingSound.FLAT);
@@ -18,16 +18,24 @@ public class GreenerGrass extends AbstractEasyRelic {
 
     @Override
     public void atTurnStart() {
-        triggeredThisTurn = false; // Reset the flag at the start of each turn
+        doubledThisTurn = false;
     }
 
+    @Override
+    public boolean onReceivePower(AbstractPower power, AbstractCreature target) {
+        return true;
+    }
 
-    public void onApplyPower(AbstractPower power, AbstractCreature target, AbstractCreature source) {
-        if (!triggeredThisTurn && target == AbstractDungeon.player && power.type == AbstractPower.PowerType.BUFF) {
+    @Override
+    public int onReceivePowerStacks(AbstractPower power, AbstractCreature target, int stackAmount) {
+        if ((stackAmount > 0 || power.canGoNegative) && target == AbstractDungeon.player && power.type == AbstractPower.PowerType.BUFF && !doubledThisTurn) {
             flash();
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(target, source, power, power.amount));
-            triggeredThisTurn = true; // Set the flag to true after triggering the effect
+            power.amount *= 2;
+            power.updateDescription();
+            doubledThisTurn = true;
+            return stackAmount * 2;
         }
+        return stackAmount;
     }
 
     @Override

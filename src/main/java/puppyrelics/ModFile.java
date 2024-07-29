@@ -20,7 +20,10 @@ import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.StanceStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import puppyrelics.cards.RatRaceCard;
+import puppyrelics.relics.DarklightsStone;
 import puppyrelics.relics.AbstractEasyRelic;
+import puppyrelics.relics.RatRace;
 import puppyrelics.util.ProAudio;
 import java.nio.charset.StandardCharsets;
 
@@ -122,10 +125,16 @@ public class ModFile implements
                         UnlockTracker.markRelicAsSeen(relic.relicId);
                     }
                 });
+        BaseMod.addRelic(new RatRace(), RelicType.SHARED);
+        UnlockTracker.markRelicAsSeen(RatRace.ID);
+        BaseMod.addRelic(new DarklightsStone(), RelicType.SHARED);
+        UnlockTracker.markRelicAsSeen(DarklightsStone.ID);
     }
 
     @Override
     public void receiveEditCards() {
+        BaseMod.addCard(new RatRaceCard());
+        UnlockTracker.unlockCard(RatRaceCard.ID);
     }
 
     @Override

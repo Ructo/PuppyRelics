@@ -1,149 +1,186 @@
 {
-  "puppyrelics:AdventureCatsHat": {
+  "${ModID}:AdventureCatsHat": {
     "NAME": "Adventure Cat's Hat",
-    "FLAVOR": "A hat that grants an adventurer's spirit.",
+    "FLAVOR": "A hat that grants an adventurer's spirit. Is that cat hair?",
     "DESCRIPTIONS": [
       "Whenever you play a #ySkill, gain #yBlock equal to the amount of #ySkills played this turn."
     ]
   },
-  "puppyrelics:NinjaPuppysMask": {
-    "NAME": "Ninja Puppy's Mask",
-    "FLAVOR": "A mask that grants a ninja's technique.",
-    "DESCRIPTIONS": [
-      "Every time you play #b3 #yAttacks in a single turn, apply #b2 #yConstrict to a random enemy."
-    ]
-  },
-  "puppyrelics:AdventurersMap": {
-    "NAME": "Adventurer's Map",
-    "FLAVOR": "Whether fighting or exploring, you can find what you need!",
-    "DESCRIPTIONS": [
-      "When entering a #y? Room, receive a card reward."
-    ]
-  },
-  "puppyrelics:MonsterDrops": {
-    "NAME": "Monster Drops",
-    "FLAVOR": "Monsters now drop hearts and gold when defeated, enjoy your spoils.",
-    "DESCRIPTIONS": [
-      "When a non-minion enemy is slain, heal #b2 HP and gain #y5 gold."
-    ]
-  },
-  "puppyrelics:CatsPajamas": {
-    "NAME": "Cat's Pajamas",
-    "FLAVOR": "The power of nine lives in some silky pajamas.",
-    "DESCRIPTIONS": [
-      "Upon entering a #yRest #ySite, heal and gain gold equal to #b9 times the act number."
-    ]
-  },
-  "puppyrelics:DogsDay": {
-    "NAME": "Dog's Day",
-    "FLAVOR": "Every dog has its day.",
-    "DESCRIPTIONS": [
-      "When your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, and draw #b3 additional cards."
-    ]
-  },
-  "puppyrelics:Hyperactivity": {
-    "NAME": "Hyperactivity",
-    "FLAVOR": "Sure, you're exhausted, but there's still a small burst of energy you can eke out.",
-    "DESCRIPTIONS": [
-      "Whenever you exhaust #b4 cards, gain 1 energy."
-    ]
-  },
-  "puppyrelics:NikTheGOAT": {
-    "NAME": "Nik The GOAT",
-    "FLAVOR": "Pet the goat, the goat can always be relied on to help you when you need it, just ask.",
-    "DESCRIPTIONS": [
-      "Right-click to select a card to #yExhaust. Gain [E] equal to its cost once per turn.",
-      "You exhausted ",
-      " for ",
-      " [E] energy."
-    ]
-  },
-  "puppyrelics:AgmensHat": {
+  "${ModID}:AgmensHat": {
     "NAME": "Agmen's Hat",
     "FLAVOR": "Always be yourself, unless you can be a pirate. Then always be a pirate.",
     "DESCRIPTIONS": [
       "At the start of your turn, deal #b3 damage to all enemies. If the damage kills an enemy, gain #y10 gold."
     ]
   },
-  "puppyrelics:MoneyBush": {
+  "${ModID}:AdventurersMap": {
+    "NAME": "Adventurer's Map",
+    "FLAVOR": "Whether fighting or exploring, you can find what you need!",
+    "DESCRIPTIONS": [
+      "When entering a #y? Room, receive a card reward."
+    ]
+  },
+  "${ModID}:BeesKnees": {
+    "NAME": "Bee's Knees",
+    "FLAVOR": "What's so sweet about a bee's knees anyways? Oh, they carry the pollen that makes honey? You win this time.",
+    "DESCRIPTIONS": [
+      "When you upgrade a card at a rest site, upgrade a second one randomly. If none are left to upgrade, heal #b3 HP."
+    ]
+  },
+  "${ModID}:BlessingInDisguise": {
+    "NAME": "Blessing In Disguise",
+    "FLAVOR": "More like Blessing In The Writhes. NL Well now, Ascender's Bane isn't too bad anymore, is it?",
+    "DESCRIPTIONS": [
+      "The first #yCurse or #yStatus drawn each turn is #yExhausted. Gain [E] and draw a card when this happens."
+    ]
+  },
+  "${ModID}:BubbleBurster": {
+    "NAME": "Bubble Burster",
+    "FLAVOR": "Enemies think they are so tough. Time to burst their bubbles by showing them who's the real boss character.",
+    "DESCRIPTIONS": [
+      "At the start of combat, gain #b1 Strength. Gain #b1 additional Strength for boss fights."
+    ]
+  },
+  "${ModID}:CatsPajamas": {
+    "NAME": "Cat's Pajamas",
+    "FLAVOR": "The power of nine lives in some silky pajamas.",
+    "DESCRIPTIONS": [
+      "Upon entering a #yRest #ySite, heal and gain gold equal to #b9 times the act number."
+    ]
+  },
+  "${ModID}:DarklightsStone": {
+    "NAME": "Darklight's Stone",
+    "DESCRIPTIONS": [
+      "At the start of combat, unlock each stage's benefits smithed card. NL ",
+      "Stage 1: Draw 1 additional card at the start of each combat. NL ",
+      "Stage 2: Gain 1 Strength. NL ",
+      "Stage 3: Gain 1 Dexterity. NL ",
+      "Stage 4: Gain 2 Energy at the start of each combat. NL ",
+      " upgrades needed for the next stage."
+    ]
+  },
+  "${ModID}:DevilsAdvocate": {
+    "NAME": "Devil's Advocate",
+    "FLAVOR": "What a compelling argument. I have a simple rebuttal... I take back what is mine.",
+    "DESCRIPTIONS": [
+      "After taking damage, heal for #b25% of the next damage dealt."
+    ]
+  },
+  "${ModID}:DogsDay": {
+    "NAME": "Dog's Day",
+    "FLAVOR": "Every dog has its day.",
+    "DESCRIPTIONS": [
+      "When your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, and draw #b3 additional cards."
+    ]
+  },
+  "${ModID}:FiddleOfFitness": {
+    "NAME": "Fiddle of Fitness",
+    "FLAVOR": "This fiddle gives you 12 temporary HP of damage blocking POOOOWEEEERRRRR!",
+    "DESCRIPTIONS": [
+      "When entering a rest site, gain #b12 temporary HP in the next fight."
+    ]
+  },
+  "${ModID}:FireWithFIRE": {
+    "NAME": "Fire with FIRE",
+    "FLAVOR": "Let's watch the world burn together.",
+    "DESCRIPTIONS": [
+      "Whenever you draw a #yCurse or #yStatus, deal #b4 damage to all enemies."
+    ]
+  },
+  "${ModID}:GreenerGrass": {
+    "NAME": "Greener Grass",
+    "FLAVOR": "For once, it's on your side instead of the other.",
+    "DESCRIPTIONS": [
+      "Double the first #yBuff you gain each turn."
+    ]
+  },
+  "${ModID}:HangInThere": {
+    "NAME": "Hang In There",
+    "FLAVOR": "You can do anything you put your mind to! Believe in yourself, you are great!",
+    "DESCRIPTIONS": [
+      "Whenever you enter a #y? Room, heal #b6 HP."
+    ]
+  },
+  "${ModID}:Hyperactivity": {
+    "NAME": "Hyperactivity",
+    "FLAVOR": "Sure, you're exhausted, but there's still a small burst of energy you can eke out.",
+    "DESCRIPTIONS": [
+      "Whenever you exhaust #b4 cards, gain 1 energy."
+    ]
+  },
+  "${ModID}:KnuckleDown": {
+    "NAME": "Knuckle Down",
+    "FLAVOR": "When things get rough, sometimes you just have to focus on your goals to make it to tomorrow.",
+    "DESCRIPTIONS": [
+      "If you play #b3 #ySkills in a turn, remove a random debuff stack from yourself."
+    ]
+  },
+  "${ModID}:LousyRelic": {
+    "NAME": "Lousy Relic",
+    "FLAVOR": "I subscribed to Puppy Relics and all I got was this Lousy Relic.",
+    "DESCRIPTIONS": [
+      "Once per combat when you lose HP, gain #yBlur and #b12 Block."
+    ]
+  },
+  "${ModID}:MoneyBush": {
     "NAME": "Money Bush",
-    "FLAVOR": "Because money doesn't grow on trees.",
+    "FLAVOR": "Because money doesn't grow on trees. It grows on bushes.",
     "DESCRIPTIONS": [
       "Whenever you climb a floor, gain #y5 gold. Upon pickup, this benefit is retroactive. (#y5 gold)",
       "Whenever you climb a floor, gain #y5 gold. You have gained #y",
       "[] gold."
     ]
   },
-  "puppyrelics:BlessingInDisguise": {
-    "NAME": "Blessing In Disguise",
+  "${ModID}:MonsterDrops": {
+    "NAME": "Monster Drops",
+    "FLAVOR": "Monsters now drop hearts and gold when defeated. Maybe you'll be the next hero of courage, do you have your fairy?",
     "DESCRIPTIONS": [
-      "The first #yCurse or #yStatus drawn each turn is #yExhausted. Gain [E] and draw a card."
+      "When a non-minion enemy is slain, heal #b2 HP and gain #y5 gold."
     ]
   },
-  "puppyrelics:OneStone": {
+  "${ModID}:NinjaPuppysMask": {
+    "NAME": "Ninja Puppy's Mask",
+    "FLAVOR": "A mask that grants a ninja's technique. Smells like dog.",
+    "DESCRIPTIONS": [
+      "Every time you play #b3 #yAttacks in a single turn, apply #b2 #yConstrict to a random enemy."
+    ]
+  },
+  "${ModID}:NikTheGOAT": {
+    "NAME": "Nik The GOAT",
+    "FLAVOR": "Pet the goat, the goat can always be relied on to help you when you need it, just ask.",
+    "DESCRIPTIONS": [
+      "Once per turn you can click the goat or right click the relic to select a card to #yExhaust. Gain [E] equal to its cost.",
+      "You exhausted ",
+      " for ",
+      " [E] energy."
+      ]
+  },
+  "${ModID}:OneStone": {
     "NAME": "One Stone",
+    "FLAVOR": "Now you just have to find two birds and you will be all set.",
     "DESCRIPTIONS": [
       "If you end your turn with #b1 card in your hand, gain [E] and draw a card next turn."
     ]
   },
-  "puppyrelics:KnuckleDown": {
-    "NAME": "Knuckle Down",
+  "${ModID}:RatRace": {
+    "NAME": "Rat Race",
+    "FLAVOR": "Climbing the corporate ladder is taxing, some say it's feels kind of Shammy",
     "DESCRIPTIONS": [
-      "If you play #b3 #ySkills in a turn, remove a random debuff stack from yourself."
+      "At the start of your turn, if you have no #yStatus cards in your hand, add a #yRat #yRace card to your hand."
     ]
   },
-  "puppyrelics:TheBold": {
+  "${ModID}:TheBold": {
     "NAME": "The Bold",
+    "FLAVOR": "What kind of adventure doesn't have some mystery? That's where all the fortune is after all.",
     "DESCRIPTIONS": [
       "Whenever you enter a #y? Room, gain #b1 Max HP."
     ]
   },
-  "puppyrelics:FireWithFIRE": {
-    "NAME": "Fire with FIRE",
-    "DESCRIPTIONS": [
-      "Whenever you draw a #yCurse or #yStatus, deal #b6 damage to all enemies."
-    ]
-  },
-  "puppyrelics:DevilsAdvocate": {
-    "NAME": "Devil's Advocate",
-    "DESCRIPTIONS": [
-      "After taking damage, heal for #b25% of the next damage dealt."
-    ]
-  },
-  "puppyrelics:GreenerGrass": {
-    "NAME": "Greener Grass",
-    "DESCRIPTIONS": [
-      "Double the first #yBuff you gain each turn."
-    ]
-  },
-  "puppyrelics:UnturnedStone": {
+  "${ModID}:UnturnedStone": {
     "NAME": "Unturned Stone",
+    "FLAVOR": "There's always the ability to deal damage... you just gotta look for it sometimes.",
     "DESCRIPTIONS": [
       "Whenever your hand, draw pile, or discard pile is empty, deal #b7 damage to all enemies."
     ]
-  },
-  "puppyrelics:BiggerThumb": {
-    "NAME": "Bigger Thumb",
-    "DESCRIPTIONS": [
-      "At the start of each turn, apply #yFeeble to the highest health monster."
-    ]
-  },
-  "puppyrelics:HangInThere": {
-    "NAME": "Hang In There",
-    "DESCRIPTIONS": [
-      "Whenever you enter a #y? Room, heal #b6 HP."
-    ]
-  },
-  "puppyrelics:DarklightsStone": {
-    "NAME": "Darklight's Stone",
-    "DESCRIPTIONS": [
-      "This relic evolves based on the number of card upgrades performed.",
-      "Upgrades 3: Draw 1 additional card at the start of each combat.",
-      "Upgrades 6: Gain 1 Strength.",
-      "Upgrades 9: Gain 1 Dexterity.",
-      "Upgrades 12: Gain 2 Energy at the start of each combat.",
-      " upgrades needed for next stage."
-    ]
   }
 }
-

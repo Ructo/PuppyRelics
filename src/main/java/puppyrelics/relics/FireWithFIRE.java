@@ -20,7 +20,7 @@ public class FireWithFIRE extends AbstractEasyRelic {
     public void onCardDraw(AbstractCard card) {
         if (card.type == AbstractCard.CardType.CURSE || card.type == AbstractCard.CardType.STATUS) {
             flash();
-            AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(6, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE));
+            AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(AbstractDungeon.player, DamageInfo.createDamageMatrix(4, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.FIRE));
         }
     }
 

@@ -1,8 +1,10 @@
 package puppyrelics.relics;
 
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
+import com.megacrit.cardcrawl.powers.EnergizedBluePower;
+import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 import static puppyrelics.ModFile.makeID;
@@ -15,10 +17,15 @@ public class OneStone extends AbstractEasyRelic {
     }
 
     @Override
-    public void atTurnStart() {
+    public void onPlayerEndTurn() {
         if (AbstractDungeon.player.hand.size() == 1) {
-            AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
-            AbstractDungeon.actionManager.addToBottom(new DrawCardAction(AbstractDungeon.player, 1));
+            flash();
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                    AbstractDungeon.player, AbstractDungeon.player, new EnergizedBluePower(AbstractDungeon.player, 1), 1
+            ));
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                    AbstractDungeon.player, AbstractDungeon.player, new DrawCardNextTurnPower(AbstractDungeon.player, 1), 1
+            ));
         }
     }
 

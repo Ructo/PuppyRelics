@@ -1,18 +1,24 @@
 package puppyrelics.relics;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.stslib.relics.RelicWithButton;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.defect.RecycleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
+import java.util.ArrayList;
+
 import static puppyrelics.ModFile.makeID;
 
-public class NikTheGOAT extends AbstractEasyClickRelic {
+public class NikTheGOAT extends AbstractEasyClickRelic implements RelicWithButton {
     public static final String ID = makeID("NikTheGOAT");
+    private static final String textureString = "puppyrelicsResources/images/relics/NikTheGOATButton.png";
     private boolean usedThisTurn = false;
     private AbstractCard lastExhaustedCard = null;
 
@@ -26,6 +32,41 @@ public class NikTheGOAT extends AbstractEasyClickRelic {
         lastExhaustedCard = null; // Reset the last exhausted card
         grayscale = false; // Reset the grayscale
         updateDescription();
+    }
+
+    @Override
+    public Texture getTexture() {
+        return ImageMaster.loadImage(textureString);
+    }
+
+    @Override
+    public void onButtonPress() {
+        if (!usedThisTurn && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            AbstractDungeon.actionManager.addToBottom(new AbstractGameAction() {
+                @Override
+                public void update() {
+                    if (!AbstractDungeon.handCardSelectScreen.selectedCards.group.isEmpty()) {
+                        lastExhaustedCard = AbstractDungeon.handCardSelectScreen.selectedCards.group.get(0);
+                    }
+                    AbstractDungeon.actionManager.addToBottom(new RecycleAction());
+                    isDone = true;
+                }
+            });
+
+            usedThisTurn = true; // Mark the relic as used for this turn
+            grayscale = true; // Turn the relic grayscale
+            updateDescription();
+        }
+    }
+
+    @Override
+    public boolean isButtonDisabled() {
+        return grayscale;
+    }
+
+    @Override
+    public ArrayList<PowerTip> getHoverTips() {
+        return tips;
     }
 
     @Override
@@ -47,7 +88,6 @@ public class NikTheGOAT extends AbstractEasyClickRelic {
             updateDescription();
         }
     }
-
     @Override
     public String getUpdatedDescription() {
         if (usedThisTurn && lastExhaustedCard != null) {
