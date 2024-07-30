@@ -13,7 +13,7 @@ public class BubbleBurster extends AbstractEasyRelic {
     public static final String ID = makeID("BubbleBurster");
 
     public BubbleBurster() {
-        super(ID, RelicTier.RARE, LandingSound.FLAT);
+        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override

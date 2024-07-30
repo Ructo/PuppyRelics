@@ -14,7 +14,7 @@ public class DevilsAdvocate extends AbstractEasyRelic {
     private int damageTaken = 0;
 
     public DevilsAdvocate() {
-        super(ID, RelicTier.RARE, LandingSound.FLAT);
+        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override

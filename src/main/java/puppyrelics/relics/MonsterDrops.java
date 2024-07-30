@@ -16,7 +16,7 @@ public class MonsterDrops extends AbstractEasyRelic {
 
     @Override
     public void onMonsterDeath(AbstractMonster m) {
-        if (AbstractDungeon.getCurrRoom() instanceof MonsterRoom) {
+        if (AbstractDungeon.getCurrRoom() instanceof MonsterRoom && !m.hasPower("Minion")) {
             flash();
             AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, AbstractDungeon.player, 2));
             AbstractDungeon.player.gainGold(5);

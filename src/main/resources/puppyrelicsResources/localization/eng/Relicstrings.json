@@ -51,7 +51,7 @@
   "${ModID}:DarklightsStone": {
     "NAME": "Darklight's Stone",
     "DESCRIPTIONS": [
-      "At the start of combat, unlock each stage's benefits smithed card. NL ",
+      "At the start of combat, unlock each stage's benefits per smithed card. NL ",
       "Stage 1: Draw 1 additional card at the start of each combat. NL ",
       "Stage 2: Gain 1 Strength. NL ",
       "Stage 3: Gain 1 Dexterity. NL ",
@@ -70,7 +70,7 @@
     "NAME": "Dog's Day",
     "FLAVOR": "Every dog has its day.",
     "DESCRIPTIONS": [
-      "When your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, and draw #b3 additional cards."
+      "Once per combat, when your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, and draw #b3 additional cards."
     ]
   },
   "${ModID}:FiddleOfFitness": {
@@ -105,7 +105,7 @@
     "NAME": "Hyperactivity",
     "FLAVOR": "Sure, you're exhausted, but there's still a small burst of energy you can eke out.",
     "DESCRIPTIONS": [
-      "Whenever you exhaust #b4 cards, gain 1 energy."
+      "Whenever you exhaust #b4 cards, gain 1 [E]"
     ]
   },
   "${ModID}:KnuckleDown": {

@@ -13,7 +13,7 @@ public class FireWithFIRE extends AbstractEasyRelic {
     public static final String ID = makeID("FireWithFIRE");
 
     public FireWithFIRE() {
-        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, RelicTier.RARE, LandingSound.FLAT);
     }
 
     @Override

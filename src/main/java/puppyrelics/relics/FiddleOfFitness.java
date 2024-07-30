@@ -14,7 +14,7 @@ public class FiddleOfFitness extends AbstractEasyRelic {
     private boolean firstTurn = true;
 
     public FiddleOfFitness() {
-        super(ID, RelicTier.RARE, LandingSound.FLAT);
+        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override
