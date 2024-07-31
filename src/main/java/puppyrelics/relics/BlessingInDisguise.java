@@ -14,7 +14,7 @@ public class BlessingInDisguise extends AbstractEasyRelic {
     private boolean triggeredThisTurn = false;
 
     public BlessingInDisguise() {
-        super(ID, RelicTier.RARE, LandingSound.FLAT);
+        super(ID, RelicTier.BOSS, LandingSound.FLAT);
     }
 
     @Override

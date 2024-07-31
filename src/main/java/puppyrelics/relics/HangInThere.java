@@ -19,7 +19,7 @@ public class HangInThere extends AbstractEasyRelic {
     public void onEnterRoom(AbstractRoom room) {
         if (room instanceof EventRoom) {
             flash();
-            AbstractDungeon.player.heal(6);
+            AbstractDungeon.player.heal(3);
         }
     }
 

@@ -14,7 +14,7 @@ public class DevilsAdvocate extends AbstractEasyRelic {
     private int damageTaken = 0;
 
     public DevilsAdvocate() {
-        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, RelicTier.BOSS, LandingSound.FLAT);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class DevilsAdvocate extends AbstractEasyRelic {
     @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
         if (damageTaken > 0 && damageAmount > 0 && info.owner == AbstractDungeon.player) {
-            int healAmount = (int) (damageAmount * 0.25);
+            int healAmount = (int) (damageAmount * 0.5);
             flash();
             AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, AbstractDungeon.player, healAmount));
             damageTaken = 0; // Reset the damage taken after applying the healing

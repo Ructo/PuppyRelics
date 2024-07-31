@@ -23,27 +23,16 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
     private int currentStage = 0;
 
     public DarklightsStone() {
-        super(ID, IMG_PATH + "DarklightsStone_stage1.png", RelicTier.RARE, LandingSound.FLAT);
-        loadImages(1); // Initialize the default image
+        super(ID, IMG_PATH + "DarklightsStone_stage0.png", RelicTier.RARE, LandingSound.FLAT);
+        loadImages(0); // Initialize the default image
     }
 
     @Override
     public void betterOnSmith(AbstractCard card) {
-        int upgradeCount = getUpgradeCount();
-        int stage = upgradeCount / UPGRADE_THRESHOLD;
-        if (stage > currentStage) {
-            currentStage = stage;
-            evolveRelic(stage);
-            updateDescription(upgradeCount);
-            loadImages(stage);
-        }
-    }
-
-    private int getUpgradeCount() {
-        if (AbstractDungeon.player == null || AbstractDungeon.player.masterDeck == null) {
-            return 0;
-        }
-        return (int) AbstractDungeon.player.masterDeck.group.stream().filter(card -> card.upgraded).count();
+        currentStage++;
+        evolveRelic(currentStage);
+        updateDescription(currentStage);
+        loadImages(currentStage);
     }
 
     private void evolveRelic(int stage) {
@@ -70,7 +59,6 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
     @Override
     public void atBattleStart() {
         evolveRelic(currentStage);
-        updateDescription(getUpgradeCount());
     }
 
     private void updateDescription(int upgradeCount) {
@@ -78,27 +66,25 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
         StringBuilder descBuilder = new StringBuilder(DESCRIPTIONS[0]);
 
         if (stage >= 0) {
-            descBuilder.append("#y").append(DESCRIPTIONS[1]).append(" NL ");
-        } else {
             descBuilder.append(DESCRIPTIONS[1]).append(" NL ");
         }
 
         if (stage >= 1) {
-            descBuilder.append("#y").append(DESCRIPTIONS[2]).append(" NL ");
+            descBuilder.append("#yStage #y2: ").append(DESCRIPTIONS[2]).append(" NL ");
         } else {
-            descBuilder.append(DESCRIPTIONS[2]).append(" NL ");
+            descBuilder.append("Stage 2: ").append(DESCRIPTIONS[2]).append(" NL ");
         }
 
         if (stage >= 2) {
-            descBuilder.append("#y").append(DESCRIPTIONS[3]).append(" NL ");
+            descBuilder.append("#yStage #y3: ").append(DESCRIPTIONS[3]).append(" NL ");
         } else {
-            descBuilder.append(DESCRIPTIONS[3]).append(" NL ");
+            descBuilder.append("Stage 3: ").append(DESCRIPTIONS[3]).append(" NL ");
         }
 
         if (stage >= 3) {
-            descBuilder.append("#y").append(DESCRIPTIONS[4]);
+            descBuilder.append("#yStage #y4: ").append(DESCRIPTIONS[4]);
         } else {
-            descBuilder.append(DESCRIPTIONS[4]);
+            descBuilder.append("Stage 4: ").append(DESCRIPTIONS[4]);
         }
 
         this.description = descBuilder.toString();
@@ -115,7 +101,7 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
 
     @Override
     public void onEquip() {
-        updateDescription(getUpgradeCount());
+        updateDescription(currentStage);
         loadImages(currentStage);
     }
 
@@ -129,7 +115,7 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
         if (stage != null) {
             currentStage = stage;
             loadImages(stage);
-            updateDescription(getUpgradeCount());
+            updateDescription(stage);
         }
     }
 

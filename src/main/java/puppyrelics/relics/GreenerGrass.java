@@ -5,12 +5,14 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import static puppyrelics.ModFile.makeID;
 
 public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRelic {
     public static final String ID = makeID("GreenerGrass");
     private boolean doubledThisTurn = false;
+    private boolean energyReducedThisCombat = false;
 
     public GreenerGrass() {
         super(ID, RelicTier.RARE, LandingSound.FLAT);
@@ -19,6 +21,19 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
     @Override
     public void atTurnStart() {
         doubledThisTurn = false;
+        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !energyReducedThisCombat) {
+            AbstractDungeon.player.energy.energy--;
+        }
+    }
+
+    @Override
+    public void atPreBattle() {
+        if (!energyReducedThisCombat) {
+            AbstractDungeon.player.energy.energyMaster--;
+            energyReducedThisCombat = true;
+        }
+        // Set the current energy to max energy minus 1 for the first turn
+        AbstractDungeon.player.energy.energy = AbstractDungeon.player.energy.energyMaster;
     }
 
     @Override
@@ -36,6 +51,26 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
             return stackAmount * 2;
         }
         return stackAmount;
+    }
+
+    @Override
+    public void onVictory() {
+        if (energyReducedThisCombat) {
+            AbstractDungeon.player.energy.energyMaster++;
+            energyReducedThisCombat = false;
+        }
+    }
+
+    @Override
+    public void onEquip() {
+        // Reduce energy master immediately when the relic is equipped
+        AbstractDungeon.player.energy.energyMaster--;
+    }
+
+    @Override
+    public void onUnequip() {
+        // Restore energy master when the relic is unequipped
+        AbstractDungeon.player.energy.energyMaster++;
     }
 
     @Override

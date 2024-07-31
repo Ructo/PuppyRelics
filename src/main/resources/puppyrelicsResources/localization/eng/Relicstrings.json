@@ -6,18 +6,18 @@
       "Whenever you play a #ySkill, gain #yBlock equal to the amount of #ySkills played this turn."
     ]
   },
+  "${ModID}:AdventurersMap": {
+    "NAME": "Adventurer's Map",
+    "FLAVOR": "Whether fighting or exploring, you can find what you need!",
+    "DESCRIPTIONS": [
+      "Upon entering a 3rd #y? Room, receive a card reward."
+    ]
+  },
   "${ModID}:AgmensHat": {
     "NAME": "Agmen's Hat",
     "FLAVOR": "Always be yourself, unless you can be a pirate. Then always be a pirate.",
     "DESCRIPTIONS": [
       "At the start of your turn, deal #b3 damage to all enemies. If the damage kills an enemy, gain #y10 gold."
-    ]
-  },
-  "${ModID}:AdventurersMap": {
-    "NAME": "Adventurer's Map",
-    "FLAVOR": "Whether fighting or exploring, you can find what you need!",
-    "DESCRIPTIONS": [
-      "When entering a #y? Room, receive a card reward."
     ]
   },
   "${ModID}:BeesKnees": {
@@ -29,7 +29,7 @@
   },
   "${ModID}:BlessingInDisguise": {
     "NAME": "Blessing In Disguise",
-    "FLAVOR": "More like Blessing In The Writhes. NL Well now, Ascender's Bane isn't too bad anymore, is it?",
+    "FLAVOR": "More like Blessing In The Writhes. Well now, Ascender's Bane isn't too bad anymore, is it?",
     "DESCRIPTIONS": [
       "The first #yCurse or #yStatus drawn each turn is #yExhausted. Gain [E] and draw a card when this happens."
     ]
@@ -50,20 +50,20 @@
   },
   "${ModID}:DarklightsStone": {
     "NAME": "Darklight's Stone",
+    "FLAVOR": "While it sometimes needs help to shine, the support it provides is unquestionable.",
     "DESCRIPTIONS": [
       "At the start of combat, unlock each stage's benefits per smithed card. NL ",
-      "Stage 1: Draw 1 additional card at the start of each combat. NL ",
-      "Stage 2: Gain 1 Strength. NL ",
-      "Stage 3: Gain 1 Dexterity. NL ",
-      "Stage 4: Gain 2 Energy at the start of each combat. NL ",
-      " upgrades needed for the next stage."
+      "#yStage #y1: Draw 1 additional card at the start of each combat.",
+      "Gain 1 Strength.",
+      "Gain 1 Dexterity.",
+      "Gain 2 Energy at the start of each combat."
     ]
   },
   "${ModID}:DevilsAdvocate": {
     "NAME": "Devil's Advocate",
     "FLAVOR": "What a compelling argument. I have a simple rebuttal... I take back what is mine.",
     "DESCRIPTIONS": [
-      "After taking damage, heal for #b25% of the next damage dealt."
+      "After taking damage, heal for #b50% of the next damage dealt."
     ]
   },
   "${ModID}:DogsDay": {
@@ -91,14 +91,14 @@
     "NAME": "Greener Grass",
     "FLAVOR": "For once, it's on your side instead of the other.",
     "DESCRIPTIONS": [
-      "Double the first #yBuff you gain each turn."
+      "Double the first #yBuff you gain each turn, lose 1 max [E] "
     ]
   },
   "${ModID}:HangInThere": {
     "NAME": "Hang In There",
     "FLAVOR": "You can do anything you put your mind to! Believe in yourself, you are great!",
     "DESCRIPTIONS": [
-      "Whenever you enter a #y? Room, heal #b6 HP."
+      "Whenever you enter a #y? Room, heal #b3 HP."
     ]
   },
   "${ModID}:Hyperactivity": {
@@ -173,7 +173,7 @@
     "NAME": "The Bold",
     "FLAVOR": "What kind of adventure doesn't have some mystery? That's where all the fortune is after all.",
     "DESCRIPTIONS": [
-      "Whenever you enter a #y? Room, gain #b1 Max HP."
+      "Whenever you enter a #y? Room, gain #b2 Max HP."
     ]
   },
   "${ModID}:UnturnedStone": {
