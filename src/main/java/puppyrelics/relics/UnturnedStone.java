@@ -3,6 +3,7 @@ package puppyrelics.relics;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -27,7 +28,6 @@ public class UnturnedStone extends AbstractEasyRelic {
         hasDrawnInitialHand = false;
     }
 
-
     public void onPlayerDraw() {
         hasDrawnInitialHand = true;
     }
@@ -35,7 +35,7 @@ public class UnturnedStone extends AbstractEasyRelic {
     @Override
     public void update() {
         super.update();
-        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+        if (CardCrawlGame.isInARun() && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
                 && !AbstractDungeon.actionManager.turnHasEnded) {
             if (hasDrawnInitialHand && !handTriggered && AbstractDungeon.player.hand.isEmpty()) {
                 flash();
