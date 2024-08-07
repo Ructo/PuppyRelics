@@ -17,7 +17,10 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
     public GreenerGrass() {
         super(ID, RelicTier.RARE, LandingSound.FLAT);
     }
-
+    @Override
+    public void atTurnStart() {
+        doubledThisTurn = false;
+    }
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target) {
         return true;
