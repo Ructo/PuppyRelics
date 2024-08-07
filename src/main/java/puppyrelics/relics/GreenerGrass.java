@@ -19,24 +19,6 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
     }
 
     @Override
-    public void atTurnStart() {
-        doubledThisTurn = false;
-        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !energyReducedThisCombat) {
-            AbstractDungeon.player.energy.energy--;
-        }
-    }
-
-    @Override
-    public void atPreBattle() {
-        if (!energyReducedThisCombat) {
-            AbstractDungeon.player.energy.energyMaster--;
-            energyReducedThisCombat = true;
-        }
-        // Set the current energy to max energy minus 1 for the first turn
-        AbstractDungeon.player.energy.energy = AbstractDungeon.player.energy.energyMaster;
-    }
-
-    @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target) {
         return true;
     }
@@ -51,14 +33,6 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
             return stackAmount * 2;
         }
         return stackAmount;
-    }
-
-    @Override
-    public void onVictory() {
-        if (energyReducedThisCombat) {
-            AbstractDungeon.player.energy.energyMaster++;
-            energyReducedThisCombat = false;
-        }
     }
 
     @Override
