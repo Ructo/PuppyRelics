@@ -18,8 +18,8 @@ import static puppyrelics.ModFile.makeID;
 
 public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic, CustomSavable<Integer> {
     public static final String ID = makeID("DarklightsStone");
-    private static final int UPGRADE_THRESHOLD = 1;
     private static final String IMG_PATH = "puppyrelicsResources/images/relics/";
+    private static final int MAX_STAGE = 4;
     private int currentStage = 0;
 
     public DarklightsStone() {
@@ -29,10 +29,12 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
 
     @Override
     public void betterOnSmith(AbstractCard card) {
-        currentStage++;
-        evolveRelic(currentStage);
-        updateDescription(currentStage);
-        loadImages(currentStage);
+        if (currentStage < MAX_STAGE) {
+            currentStage++;
+            evolveRelic(currentStage);
+            updateDescription(currentStage);
+            loadImages(currentStage);
+        }
     }
 
     private void evolveRelic(int stage) {
@@ -62,32 +64,27 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
     }
 
     private void updateDescription(int upgradeCount) {
-        int stage = upgradeCount / UPGRADE_THRESHOLD;
-        StringBuilder descBuilder = new StringBuilder(DESCRIPTIONS[0]);
+        int stage = upgradeCount+1;
 
-        if (stage >= 0) {
-            descBuilder.append(DESCRIPTIONS[1]).append(" NL ");
+        switch (stage) {
+            case 1:
+                this.description = DESCRIPTIONS[1];
+                break;
+            case 2:
+                this.description = DESCRIPTIONS[2];
+                break;
+            case 3:
+                this.description = DESCRIPTIONS[3];
+                break;
+            case 4:
+            case 5:
+                this.description = DESCRIPTIONS[4];
+                break;
+            default:
+                this.description = DESCRIPTIONS[0];
+                break;
         }
 
-        if (stage >= 1) {
-            descBuilder.append("#yStage #y2: ").append(DESCRIPTIONS[2]).append(" NL ");
-        } else {
-            descBuilder.append("Stage 2: ").append(DESCRIPTIONS[2]).append(" NL ");
-        }
-
-        if (stage >= 2) {
-            descBuilder.append("#yStage #y3: ").append(DESCRIPTIONS[3]).append(" NL ");
-        } else {
-            descBuilder.append("Stage 3: ").append(DESCRIPTIONS[3]).append(" NL ");
-        }
-
-        if (stage >= 3) {
-            descBuilder.append("#yStage #y4: ").append(DESCRIPTIONS[4]);
-        } else {
-            descBuilder.append("Stage 4: ").append(DESCRIPTIONS[4]);
-        }
-
-        this.description = descBuilder.toString();
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));
         initializeTips();
@@ -119,6 +116,10 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
         }
     }
 
+    @Override
+    public String getUpdatedDescription() {
+        return DESCRIPTIONS[0];
+    }
     @Override
     public AbstractRelic makeCopy() {
         return new DarklightsStone();

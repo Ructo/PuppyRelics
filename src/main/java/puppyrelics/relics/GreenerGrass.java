@@ -15,7 +15,7 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
     private boolean energyReducedThisCombat = false;
 
     public GreenerGrass() {
-        super(ID, RelicTier.RARE, LandingSound.FLAT);
+        super(ID, RelicTier.BOSS, LandingSound.FLAT);
     }
     @Override
     public void atTurnStart() {

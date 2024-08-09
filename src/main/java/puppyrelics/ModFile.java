@@ -2,30 +2,32 @@ package puppyrelics;
 
 import basemod.AutoAdd;
 import basemod.BaseMod;
+import basemod.ModLabeledToggleButton;
+import basemod.ModPanel;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.stslib.Keyword;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.localization.PotionStrings;
-import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.localization.StanceStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
+import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import puppyrelics.cards.RatRaceCard;
-import puppyrelics.relics.DarklightsStone;
 import puppyrelics.relics.AbstractEasyRelic;
+import puppyrelics.relics.DarklightsStone;
 import puppyrelics.relics.RatRace;
 import puppyrelics.util.ProAudio;
+
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
@@ -35,15 +37,28 @@ public class ModFile implements
         EditStringsSubscriber,
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
-        AddAudioSubscriber {
+        AddAudioSubscriber,
+        PostInitializeSubscriber {
 
     public static final String modID = "puppyrelics";
+    public static final String FILE_NAME = "NinjaPuppyConfig";
+
+    public static final String ENABLE_MOD = "enableMod";
+    public static boolean modEnabled = true;
+
+    public static final String LEGACY_MODE = "legacyMode";
+    public static boolean legacyMode = false;
+
+    public static final String MOUSE_RADIUS = "mouseRadius";
+    public static int mouseRadius = 360;
+
+    public static SpireConfig LOConfig;
 
     public static String makeID(String idText) {
         return modID + ":" + idText;
     }
 
-    public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); // This should be changed eventually
+    public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
 
     public static final String SHOULDER1 = makeCharacterPath("mainChar/shoulder.png");
     public static final String SHOULDER2 = makeCharacterPath("mainChar/shoulder2.png");
@@ -76,8 +91,38 @@ public class ModFile implements
     public ModFile() {
         BaseMod.subscribe(this);
 
+        Properties defaultSettings = new Properties();
+        defaultSettings.setProperty(ENABLE_MOD, Boolean.toString(modEnabled));
+        defaultSettings.setProperty(LEGACY_MODE, Boolean.toString(legacyMode));
+        defaultSettings.setProperty(MOUSE_RADIUS, String.valueOf(mouseRadius));
+
+        try {
+            LOConfig = new SpireConfig(modID, FILE_NAME, defaultSettings);
+            loadConfig();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadConfig() {
+        try {
+            modEnabled = LOConfig.getBool(ENABLE_MOD);
+            legacyMode = LOConfig.getBool(LEGACY_MODE);
+            mouseRadius = LOConfig.getInt(MOUSE_RADIUS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    private void saveConfig() {
+        try {
+            LOConfig.setBool(ENABLE_MOD, modEnabled);
+            LOConfig.setBool(LEGACY_MODE, legacyMode);
+            LOConfig.setInt(MOUSE_RADIUS, mouseRadius);
+            LOConfig.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static String makePath(String resourcePath) {
         return modID + "Resources/" + resourcePath;
     }
@@ -94,8 +139,7 @@ public class ModFile implements
         return modID + "Resources/images/powers/" + resourcePath;
     }
 
-    public static String makeCharacterPath(String resourcePath)
-    {
+    public static String makeCharacterPath(String resourcePath) {
         return modID + "Resources/images/char/" + resourcePath;
     }
 
@@ -139,14 +183,14 @@ public class ModFile implements
 
     @Override
     public void receiveEditStrings() {
-        BaseMod.loadCustomStringsFile(CardStrings.class, modID + "Resources/localization/" + getLangString() + "/Cardstrings.json");
-        BaseMod.loadCustomStringsFile(RelicStrings.class, modID + "Resources/localization/" + getLangString() + "/Relicstrings.json");
-        BaseMod.loadCustomStringsFile(CharacterStrings.class, modID + "Resources/localization/" + getLangString() + "/Charstrings.json");
-        BaseMod.loadCustomStringsFile(PowerStrings.class, modID + "Resources/localization/" + getLangString() + "/Powerstrings.json");
-        BaseMod.loadCustomStringsFile(UIStrings.class, modID + "Resources/localization/" + getLangString() + "/UIstrings.json");
-        BaseMod.loadCustomStringsFile(OrbStrings.class, modID + "Resources/localization/" + getLangString() + "/Orbstrings.json");
-        BaseMod.loadCustomStringsFile(StanceStrings.class, modID + "Resources/localization/" + getLangString() + "/Stancestrings.json");
-        BaseMod.loadCustomStringsFile(PotionStrings.class, modID + "Resources/localization/" + getLangString() + "/Potionstrings.json");
+        BaseMod.loadCustomStringsFile(CardStrings.class, makePath("localization/" + getLangString() + "/Cardstrings.json"));
+        BaseMod.loadCustomStringsFile(RelicStrings.class, makePath("localization/" + getLangString() + "/Relicstrings.json"));
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, makePath("localization/" + getLangString() + "/Charstrings.json"));
+        BaseMod.loadCustomStringsFile(PowerStrings.class, makePath("localization/" + getLangString() + "/Powerstrings.json"));
+        BaseMod.loadCustomStringsFile(UIStrings.class, makePath("localization/" + getLangString() + "/UIstrings.json"));
+        BaseMod.loadCustomStringsFile(OrbStrings.class, makePath("localization/" + getLangString() + "/Orbstrings.json"));
+        BaseMod.loadCustomStringsFile(StanceStrings.class, makePath("localization/" + getLangString() + "/Stancestrings.json"));
+        BaseMod.loadCustomStringsFile(PotionStrings.class, makePath("localization/" + getLangString() + "/Potionstrings.json"));
     }
 
     @Override
@@ -158,13 +202,40 @@ public class ModFile implements
     @Override
     public void receiveEditKeywords() {
         Gson gson = new Gson();
-        String json = Gdx.files.internal(modID + "Resources/localization/" + getLangString() + "/Keywordstrings.json").readString(String.valueOf(StandardCharsets.UTF_8));
-        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json, com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+        String json = Gdx.files.internal(makePath("localization/" + getLangString() + "/Keywordstrings.json")).readString(String.valueOf(StandardCharsets.UTF_8));
+        Keyword[] keywords = gson.fromJson(json, Keyword[].class);
 
         if (keywords != null) {
             for (Keyword keyword : keywords) {
                 BaseMod.addKeyword(modID, keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
+    }
+
+    public void receivePostInitialize() {
+        // Ensure configuration is loaded before initializing the UI
+        loadConfig();
+
+        ModPanel settingsPanel = new ModPanel();
+
+        ModLabeledToggleButton legacyToggleButton = new ModLabeledToggleButton(
+                "Enable Legacy Mode",
+                350.0f,
+                750.0f,
+                Settings.CREAM_COLOR,
+                FontHelper.charDescFont,
+                legacyMode,
+                settingsPanel,
+                (label) -> {},
+                (button) -> {
+                    legacyMode = button.enabled;
+                    saveConfig();
+                }
+        );
+        settingsPanel.addUIElement(legacyToggleButton);
+
+
+        Texture badgeTexture = new Texture(Gdx.files.internal("puppyrelicsResources/images/ui/badge.png"));
+        BaseMod.registerModBadge(badgeTexture, "Puppy Relics", "Ninja Puppy", "A collection of relics by NinjaPuppy, some are based on friends, some are idioms. I like to jokingly call it: Idioms and Idiots, with love.", settingsPanel);
     }
 }

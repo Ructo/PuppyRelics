@@ -8,9 +8,9 @@
   },
   "${ModID}:AdventurersMap": {
     "NAME": "Adventurer's Map",
-    "FLAVOR": "Whether fighting or exploring, you can find what you need!",
+    "FLAVOR": "Whether fighting or exploring, you can find what you need! Flexibility is the real treasure!",
     "DESCRIPTIONS": [
-      "Upon entering a 3rd #y? Room, receive a card reward."
+      "Every 3rd #y? Room entered, receive a card reward."
     ]
   },
   "${ModID}:AgmensHat": {
@@ -29,7 +29,7 @@
   },
   "${ModID}:BlessingInDisguise": {
     "NAME": "Blessing In Disguise",
-    "FLAVOR": "More like Blessing In The Writhes. Well now, Ascender's Bane isn't too bad anymore, is it?",
+    "FLAVOR": "More like Blessing In The Writhes. Ascender's Bane isn't too bad anymore, is it?",
     "DESCRIPTIONS": [
       "The first #yCurse or #yStatus drawn each turn is #yExhausted. Gain [E] and draw a card when this happens."
     ]
@@ -43,20 +43,20 @@
   },
   "${ModID}:CatsPajamas": {
     "NAME": "Cat's Pajamas",
-    "FLAVOR": "The power of nine lives in some silky pajamas.",
+    "FLAVOR": "The power of nine lives in some silky pajamas. They seem oddly lucky.",
     "DESCRIPTIONS": [
-      "Upon entering a #yRest #ySite, heal and gain gold equal to #b9 times the act number."
+      "Upon entering a #yRest #ySite, heal #b9 HP. Whenever you heal, gain equal #ygold."
     ]
   },
   "${ModID}:DarklightsStone": {
     "NAME": "Darklight's Stone",
     "FLAVOR": "While it sometimes needs help to shine, the support it provides is unquestionable.",
     "DESCRIPTIONS": [
-      "At the start of combat, unlock each stage's benefits per smithed card. NL ",
-      "#yStage #y1: Draw 1 additional card at the start of each combat.",
-      "Gain 1 Strength.",
-      "Gain 1 Dexterity.",
-      "Gain 2 Energy at the start of each combat."
+      "Unlock each stage's benefits per smithed card: NL Stage 1: Draw 1 additional card at the start of each combat. NL Stage 2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
+      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL Stage 2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
+      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL #yStage #y2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
+      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL #yStage #y2: Gain 1 Strength. NL #yStage #y3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
+      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL #yStage #y2: Gain 1 Strength. NL #yStage #y3: Gain 1 Dexterity. NL #yStage #y4: Gain 2 Energy at the start of each combat."
     ]
   },
   "${ModID}:DevilsAdvocate": {
@@ -149,10 +149,8 @@
     "NAME": "Nik The GOAT",
     "FLAVOR": "Pet the goat, the goat can always be relied on to help you when you need it, just ask.",
     "DESCRIPTIONS": [
-      "Once per turn you can click the goat or right click the relic to select a card to #yExhaust. Gain [E] equal to its cost.",
-      "You exhausted ",
-      " for ",
-      " [E] energy."
+      "At the start of your turn, select a card to #yExhaust. Gain [E] equal to its cost.",
+      "Once per turn you can click the goat or right click the relic to select a card to #yExhaust. Gain [E] equal to its cost."
       ]
   },
   "${ModID}:OneStone": {
