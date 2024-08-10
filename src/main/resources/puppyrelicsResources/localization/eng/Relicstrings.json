@@ -63,7 +63,7 @@
     "NAME": "Devil's Advocate",
     "FLAVOR": "What a compelling argument. I have a simple rebuttal... I take back what is mine.",
     "DESCRIPTIONS": [
-      "After taking damage, heal for #b50% of the next damage dealt."
+      "When you lose HP, gain temporary HP for #b50% of the next damage dealt by you."
     ]
   },
   "${ModID}:DogsDay": {
@@ -108,6 +108,13 @@
       "Whenever you exhaust #b4 cards, gain 1 [E]"
     ]
   },
+  "${ModID}:IcingOnThePotion": {
+    "NAME": "Icing On The Potion",
+    "FLAVOR": "We're not sure who put icing on this potion, but something about the flavor draws you in.",
+    "DESCRIPTIONS": [
+      "Whenever you drink a potion, draw a card. If you aren't in combat, do so next combat."
+    ]
+  },
   "${ModID}:KnuckleDown": {
     "NAME": "Knuckle Down",
     "FLAVOR": "When things get rough, sometimes you just have to focus on your goals to make it to tomorrow.",
@@ -119,7 +126,7 @@
     "NAME": "Lousy Relic",
     "FLAVOR": "I subscribed to Puppy Relics and all I got was this Lousy Relic.",
     "DESCRIPTIONS": [
-      "Once per combat when you lose HP, gain #yBlur and #b12 Block."
+      "The first time you lose HP in combat, gain #yBlur and #b12 Block."
     ]
   },
   "${ModID}:MoneyBush": {
@@ -150,7 +157,7 @@
     "FLAVOR": "Pet the goat, the goat can always be relied on to help you when you need it, just ask.",
     "DESCRIPTIONS": [
       "At the start of your turn, select a card to #yExhaust. Gain [E] equal to its cost.",
-      "Once per turn you can click the goat or right click the relic to select a card to #yExhaust. Gain [E] equal to its cost."
+      "Once per turn you can right click the relic to select a card to #yExhaust. Gain [E] equal to its cost."
       ]
   },
   "${ModID}:OneStone": {
@@ -172,6 +179,13 @@
     "FLAVOR": "What kind of adventure doesn't have some mystery? That's where all the fortune is after all.",
     "DESCRIPTIONS": [
       "Whenever you enter a #y? Room, gain #b2 Max HP."
+    ]
+  },
+  "${ModID}:ToughCookie": {
+    "NAME": "Tough Cookie",
+    "FLAVOR": "How tough am I? I frequent the Salty Spitoon and eat Dwarf Bread for breakfast.",
+    "DESCRIPTIONS": [
+      "At the start of elite combats, heal 15 HP."
     ]
   },
   "${ModID}:UnturnedStone": {

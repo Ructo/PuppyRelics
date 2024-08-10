@@ -17,11 +17,13 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import puppyrelics.cards.RatRaceCard;
 import puppyrelics.relics.AbstractEasyRelic;
 import puppyrelics.relics.DarklightsStone;
+import puppyrelics.relics.NikTheGOAT;
 import puppyrelics.relics.RatRace;
 import puppyrelics.util.ProAudio;
 
@@ -90,7 +92,6 @@ public class ModFile implements
 
     public ModFile() {
         BaseMod.subscribe(this);
-
         Properties defaultSettings = new Properties();
         defaultSettings.setProperty(ENABLE_MOD, Boolean.toString(modEnabled));
         defaultSettings.setProperty(LEGACY_MODE, Boolean.toString(legacyMode));
@@ -215,11 +216,15 @@ public class ModFile implements
     public void receivePostInitialize() {
         // Ensure configuration is loaded before initializing the UI
         loadConfig();
+        try {
+            legacyMode = LOConfig.getBool(LEGACY_MODE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ModPanel settingsPanel = new ModPanel();
-
         ModLabeledToggleButton legacyToggleButton = new ModLabeledToggleButton(
-                "Enable Legacy Mode",
+                "Enable Legacy GOAT Mode",
                 350.0f,
                 750.0f,
                 Settings.CREAM_COLOR,
@@ -229,7 +234,26 @@ public class ModFile implements
                 (label) -> {},
                 (button) -> {
                     legacyMode = button.enabled;
-                    saveConfig();
+
+                    // Check the state of legacyMode
+                    if (legacyMode) {
+                        NikTheGOAT compendiumRelic = (NikTheGOAT) RelicLibrary.getRelic(NikTheGOAT.ID);
+                        if (compendiumRelic != null) {
+                            compendiumRelic.refreshDescription();
+                        }
+                    } else {
+                        NikTheGOAT compendiumRelic = (NikTheGOAT) RelicLibrary.getRelic(NikTheGOAT.ID);
+                        if (compendiumRelic != null) {
+                            compendiumRelic.refreshDescription();
+                        }
+                    }
+
+                    try {
+                        LOConfig.setBool(LEGACY_MODE, legacyMode);
+                        LOConfig.save();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
         );
         settingsPanel.addUIElement(legacyToggleButton);
