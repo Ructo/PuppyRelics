@@ -7,10 +7,12 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class UnturnedStone extends AbstractEasyRelic {
+public class UnturnedStone extends AbstractEasyClickRelic {
     public static final String ID = makeID("UnturnedStone");
 
     private boolean handTriggered = false;
@@ -58,5 +60,9 @@ public class UnturnedStone extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new UnturnedStone();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

@@ -1,15 +1,19 @@
 package puppyrelics.relics;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom.RoomPhase;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class DevilsAdvocate extends AbstractEasyRelic {
+public class DevilsAdvocate extends AbstractEasyClickRelic {
     public static final String ID = makeID("DevilsAdvocate");
 
     private boolean readyToTrigger = false; // Flag to indicate if the relic is ready to grant temporary HP
@@ -20,13 +24,17 @@ public class DevilsAdvocate extends AbstractEasyRelic {
 
     @Override
     public void atBattleStart() {
+
         readyToTrigger = false; // Reset at the start of each battle
+        stopPulse();
     }
 
     @Override
     public void wasHPLost(int damageAmount) {
         if (damageAmount > 0 && AbstractDungeon.getCurrRoom().phase == RoomPhase.COMBAT) {
             readyToTrigger = true; // Set the flag to indicate the relic is ready to trigger on the next attack
+            beginLongPulse();
+            AbstractDungeon.actionManager.addToTop(new VFXAction(AbstractDungeon.player, new InflameEffect(AbstractDungeon.player), 1.0F));
         }
     }
 
@@ -43,6 +51,7 @@ public class DevilsAdvocate extends AbstractEasyRelic {
                         tempHPAmount
                 ));
                 readyToTrigger = false; // Reset the flag after granting temporary HP
+                stopPulse();
             }
         }
     }
@@ -60,5 +69,9 @@ public class DevilsAdvocate extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new DevilsAdvocate();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.devil);
     }
 }

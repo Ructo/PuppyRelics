@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class FireWithFIRE extends AbstractEasyRelic {
+public class FireWithFIRE extends AbstractEasyClickRelic {
     public static final String ID = makeID("FireWithFIRE");
 
     public FireWithFIRE() {
@@ -32,5 +34,10 @@ public class FireWithFIRE extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new FireWithFIRE();
+
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

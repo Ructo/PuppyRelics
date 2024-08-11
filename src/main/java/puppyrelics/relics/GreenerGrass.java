@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRelic {
+public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePowerRelic {
     public static final String ID = makeID("GreenerGrass");
     private boolean doubledThisTurn = false;
     private boolean energyReducedThisCombat = false;
@@ -58,5 +60,10 @@ public class GreenerGrass extends AbstractEasyRelic implements OnReceivePowerRel
     @Override
     public AbstractRelic makeCopy() {
         return new GreenerGrass();
+
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

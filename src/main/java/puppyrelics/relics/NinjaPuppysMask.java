@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.ConstrictedPower;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class NinjaPuppysMask extends AbstractEasyRelic {
+public class NinjaPuppysMask extends AbstractEasyClickRelic {
     public static final String ID = makeID("NinjaPuppysMask");
     private int attackCounter = 0;
 
@@ -34,5 +36,9 @@ public class NinjaPuppysMask extends AbstractEasyRelic {
                 }
             }
         }
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.ninja);
     }
 }

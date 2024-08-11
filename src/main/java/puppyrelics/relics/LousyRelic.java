@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.BlurPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class LousyRelic extends AbstractEasyRelic {
+public class LousyRelic extends AbstractEasyClickRelic {
     public static final String ID = makeID("LousyRelic");
     private boolean usedThisCombat = false;
 
@@ -30,6 +32,11 @@ public class LousyRelic extends AbstractEasyRelic {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new BlurPower(AbstractDungeon.player, 1), 1));
             usedThisCombat = true; // Set the flag to true after triggering the effect
         }
+    }
+
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 
     @Override

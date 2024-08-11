@@ -1,5 +1,6 @@
 package puppyrelics.relics;
 
+import basemod.abstracts.CustomRelic;
 import com.evacipated.cardcrawl.mod.stslib.patches.HitboxRightClick;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -7,15 +8,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public abstract class AbstractEasyClickRelic extends AbstractEasyRelic {
+public abstract class AbstractUniqueClickRelic extends CustomRelic {
+    public AbstractCard.CardColor color;
 
-    public AbstractEasyClickRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx) {
-        super(setId, tier, sfx);
+    public AbstractUniqueClickRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx) {
+        super(setId, (String) null, tier, sfx);
     }
 
-    public AbstractEasyClickRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx, AbstractCard.CardColor color) {
-        super(setId, tier, sfx, color);
-
+    public AbstractUniqueClickRelic(String setId, AbstractRelic.RelicTier tier, AbstractRelic.LandingSound sfx, AbstractCard.CardColor color) {
+        super(setId, (String) null, tier, sfx);
+        this.color = color;
     }
 
     @Override
@@ -36,8 +38,8 @@ public abstract class AbstractEasyClickRelic extends AbstractEasyRelic {
 
     public abstract void onRightClick();
 
+    public abstract void loadImages(int stage);
+
     @Override
-    public String getUpdatedDescription() {
-        return DESCRIPTIONS[0];
-    }
+    public abstract String getUpdatedDescription();
 }

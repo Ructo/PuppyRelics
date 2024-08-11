@@ -4,10 +4,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.PowerTip;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class MoneyBush extends AbstractEasyRelic {
+public class MoneyBush extends AbstractEasyClickRelic {
     public static final String ID = makeID("MoneyBush");
     private static final int GOLD_PER_ROOM = 5;
     private int totalGoldEarned = 0;
@@ -51,5 +53,9 @@ public class MoneyBush extends AbstractEasyRelic {
         this.tips.clear();
         this.tips.add(new PowerTip(this.name, this.description));
         initializeTips();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

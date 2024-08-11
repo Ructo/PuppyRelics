@@ -7,14 +7,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
+import puppyrelics.util.ProAudio;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class BeesKnees extends AbstractEasyRelic implements BetterOnSmithRelic {
+public class BeesKnees extends AbstractEasyClickRelic implements BetterOnSmithRelic {
     public static final String ID = makeID("BeesKnees");
 
     public BeesKnees() {
@@ -56,6 +58,11 @@ public class BeesKnees extends AbstractEasyRelic implements BetterOnSmithRelic {
             AbstractDungeon.topLevelEffects.add(new ShowCardBrieflyEffect(randomCardToUpgrade.makeStatEquivalentCopy(), xPos, yPos));
             AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(xPos, yPos));
         }
+    }
+
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 
     @Override

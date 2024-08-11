@@ -10,15 +10,17 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import puppyrelics.cards.RatRaceCard;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class RatRace extends CustomRelic {
+public class RatRace extends AbstractEasyClickRelic {
     public static final String ID = makeID("RatRace");
     private boolean hasStatusCardInHand = false;
 
     public RatRace() {
-        super(ID, ImageMaster.loadImage("puppyrelicsResources/images/relics/RatRace.png"), RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
         tips.clear();
         tips.add(new PowerTip(name, description));
         tips.add(new CardPowerTip(new RatRaceCard()));
@@ -46,5 +48,9 @@ public class RatRace extends CustomRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new RatRace();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

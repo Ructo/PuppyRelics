@@ -52,11 +52,11 @@
     "NAME": "Darklight's Stone",
     "FLAVOR": "While it sometimes needs help to shine, the support it provides is unquestionable.",
     "DESCRIPTIONS": [
-      "Unlock each stage's benefits per smithed card: NL Stage 1: Draw 1 additional card at the start of each combat. NL Stage 2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
-      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL Stage 2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
-      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL #yStage #y2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
-      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL #yStage #y2: Gain 1 Strength. NL #yStage #y3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy at the start of each combat.",
-      "Unlock each stage's benefits per smithed card: NL #yStage #y1: Draw 1 additional card at the start of each combat. NL #yStage #y2: Gain 1 Strength. NL #yStage #y3: Gain 1 Dexterity. NL #yStage #y4: Gain 2 Energy at the start of each combat."
+      "Unlock each stage's benefits once per combat per smithed card: NL Stage 1: Draw 1 additional card. NL Stage 2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy.",
+      "Unlock each stage's benefits once per combat per smithed card: NL #yStage #y1: Draw 1 additional card. NL Stage 2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy.",
+      "Unlock each stage's benefits once per combat per smithed card: NL #yStage #y1: Draw 1 additional card. NL #yStage #y2: Gain 1 Strength. NL Stage 3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy.",
+      "Unlock each stage's benefits once per combat per smithed card: NL #yStage #y1: Draw 1 additional card. NL #yStage #y2: Gain 1 Strength. NL #yStage #y3: Gain 1 Dexterity. NL Stage 4: Gain 2 Energy.",
+      "Unlock each stage's benefits once per combat per smithed card: NL #yStage #y1: Draw 1 additional card. NL #yStage #y2: Gain 1 Strength. NL #yStage #y3: Gain 1 Dexterity. NL #yStage #y4: Gain 2 Energy."
     ]
   },
   "${ModID}:DevilsAdvocate": {

@@ -9,10 +9,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class AgmensHat extends AbstractEasyRelic {
+public class AgmensHat extends AbstractEasyClickRelic {
     public static final String ID = makeID("AgmensHat");
     private static final int DAMAGE = 3;
     private static final int GOLD_REWARD = 10;
@@ -48,5 +50,9 @@ public class AgmensHat extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new AgmensHat();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.pirate);
     }
 }

@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class KnuckleDown extends AbstractEasyRelic {
+public class KnuckleDown extends AbstractEasyClickRelic {
     public static final String ID = makeID("KnuckleDown");
 
     private int skillCount = 0;
@@ -54,5 +56,9 @@ public class KnuckleDown extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new KnuckleDown();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.heavyblunt);
     }
 }

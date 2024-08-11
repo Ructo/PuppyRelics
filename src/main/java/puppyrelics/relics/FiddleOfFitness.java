@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.RestRoom;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class FiddleOfFitness extends AbstractEasyRelic {
+public class FiddleOfFitness extends AbstractEasyClickRelic {
     public static final String ID = makeID("FiddleOfFitness");
     private boolean firstTurn = true;
 
@@ -54,5 +56,9 @@ public class FiddleOfFitness extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new FiddleOfFitness();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.tcpower);
     }
 }

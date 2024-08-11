@@ -6,13 +6,18 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom.RoomPhase;
 import com.evacipated.cardcrawl.mod.stslib.relics.BetterOnUsePotionRelic;
+
+import static com.badlogic.gdx.math.MathUtils.random;
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
 import com.megacrit.cardcrawl.potions.AbstractPotion;
+import puppyrelics.util.ProAudio;
 
-public class IcingOnThePotion extends AbstractEasyRelic implements BetterOnUsePotionRelic{
+public class IcingOnThePotion extends AbstractEasyClickRelic implements BetterOnUsePotionRelic {
     public static final String ID = makeID("IcingOnThePotion");
     private int cardsOwed = 0; // Track the number of cards owed
+    private int soundCounter = 0;
 
     public IcingOnThePotion() {
         super(ID, RelicTier.UNCOMMON, LandingSound.CLINK);
@@ -60,5 +65,25 @@ public class IcingOnThePotion extends AbstractEasyRelic implements BetterOnUsePo
     @Override
     public AbstractRelic makeCopy() {
         return new IcingOnThePotion();
+    }
+
+    @Override
+    public void onRightClick() {
+        switch (soundCounter) {
+            case 0:
+                playAudio(ProAudio.potion1); // Replace with your actual sound key
+                break;
+            case 1:
+                playAudio(ProAudio.potion2); // Replace with your actual sound key
+                break;
+            case 2:
+                playAudio(ProAudio.potion3); // Replace with your actual sound key
+                break;
+            default:
+                break;
+        }
+
+        // Update the counter to cycle to the next sound
+        soundCounter = (soundCounter + 1) % 3; // This will loop the counter between 0, 1, 2
     }
 }

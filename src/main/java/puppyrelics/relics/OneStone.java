@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
 import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class OneStone extends AbstractEasyRelic {
+public class OneStone extends AbstractEasyClickRelic {
     public static final String ID = makeID("OneStone");
 
     public OneStone() {
@@ -37,5 +39,9 @@ public class OneStone extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new OneStone();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

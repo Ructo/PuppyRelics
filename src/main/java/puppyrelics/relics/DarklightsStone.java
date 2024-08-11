@@ -13,17 +13,21 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.evacipated.cardcrawl.mod.stslib.relics.BetterOnSmithRelic;
 import basemod.abstracts.CustomSavable;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic, CustomSavable<Integer> {
+public class DarklightsStone extends AbstractUniqueClickRelic implements BetterOnSmithRelic, CustomSavable<Integer> {
     public static final String ID = makeID("DarklightsStone");
     private static final String IMG_PATH = "puppyrelicsResources/images/relics/";
     private static final int MAX_STAGE = 4;
     private int currentStage = 0;
+    private long lastClickTime = 0;
+    private static final long COOLDOWN_MS = 200;
 
     public DarklightsStone() {
-        super(ID, IMG_PATH + "DarklightsStone_stage0.png", RelicTier.RARE, LandingSound.FLAT);
+        super(ID, RelicTier.RARE, LandingSound.FLAT);
         loadImages(0); // Initialize the default image
     }
 
@@ -64,7 +68,7 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
     }
 
     private void updateDescription(int upgradeCount) {
-        int stage = upgradeCount+1;
+        int stage = upgradeCount + 1;
 
         switch (stage) {
             case 1:
@@ -90,7 +94,8 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
         initializeTips();
     }
 
-    private void loadImages(int stage) {
+    @Override
+    public void loadImages(int stage) {
         String imgPath = IMG_PATH + "DarklightsStone_stage" + stage + ".png";
         this.img = ImageMaster.loadImage(imgPath);
         this.outlineImg = ImageMaster.loadImage(imgPath.replace(".png", "Outline.png"));
@@ -120,8 +125,18 @@ public class DarklightsStone extends AbstractRelic implements BetterOnSmithRelic
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }
+
     @Override
     public AbstractRelic makeCopy() {
         return new DarklightsStone();
+    }
+
+    @Override
+    public void onRightClick() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime >= COOLDOWN_MS) {
+            playAudio(ProAudio.ufo);
+            lastClickTime = currentTime;
+        }
     }
 }

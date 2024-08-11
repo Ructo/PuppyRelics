@@ -5,10 +5,12 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
 import com.megacrit.cardcrawl.actions.common.HealAction;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class HangInThere extends AbstractEasyRelic {
+public class HangInThere extends AbstractEasyClickRelic {
     public static final String ID = makeID("HangInThere");
 
     public HangInThere() {
@@ -31,5 +33,9 @@ public class HangInThere extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new HangInThere();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

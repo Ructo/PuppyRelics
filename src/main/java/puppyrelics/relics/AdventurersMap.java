@@ -5,10 +5,12 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import basemod.abstracts.CustomSavable;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class AdventurersMap extends AbstractEasyRelic implements CustomSavable<Integer> {
+public class AdventurersMap extends AbstractEasyClickRelic implements CustomSavable<Integer> {
     public static final String ID = makeID("AdventurersMap");
     private static final int EVENT_THRESHOLD = 3;
     private int eventRoomCounter = 0;
@@ -52,5 +54,10 @@ public class AdventurersMap extends AbstractEasyRelic implements CustomSavable<I
     @Override
     public AbstractRelic makeCopy() {
         return new AdventurersMap();
+    }
+
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.page);
     }
 }

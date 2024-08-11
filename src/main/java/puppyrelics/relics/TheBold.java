@@ -4,10 +4,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class TheBold extends AbstractEasyRelic {
+public class TheBold extends AbstractEasyClickRelic {
     public static final String ID = makeID("TheBold");
 
     public TheBold() {
@@ -30,5 +32,9 @@ public class TheBold extends AbstractEasyRelic {
     @Override
     public AbstractRelic makeCopy() {
         return new TheBold();
+    }
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 }

@@ -9,18 +9,23 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.AbstractRelic.LandingSound;
 import com.megacrit.cardcrawl.relics.AbstractRelic.RelicTier;
 import puppyrelics.relics.AbstractEasyRelic;
+import puppyrelics.util.ProAudio;
 
 import java.util.Iterator;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class ToughCookie extends AbstractEasyRelic {
+public class ToughCookie extends AbstractEasyClickRelic {
     public static final String ID = makeID("ToughCookie");
     private static final int HEAL_AMT = 15;
 
     public ToughCookie() {
         super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
     }
+
+    private long lastClickTime = 0;
+    private static final long COOLDOWN_MS = 10000;
 
     @Override
     public void atBattleStart() {
@@ -39,4 +44,14 @@ public class ToughCookie extends AbstractEasyRelic {
     public AbstractRelic makeCopy() {
         return new ToughCookie();
     }
+
+    @Override
+    public void onRightClick() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime >= COOLDOWN_MS) {
+            playAudio(ProAudio.tough);
+            lastClickTime = currentTime;
+        }
+    }
 }
+

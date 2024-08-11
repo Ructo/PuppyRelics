@@ -5,12 +5,15 @@ import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class DogsDay extends AbstractEasyRelic {
+public class DogsDay extends AbstractEasyClickRelic {
     public static final String ID = makeID("DogsDay");
     private boolean usedThisCombat = false;
+    private boolean toggle = false;
 
     public DogsDay() {
         super(ID, RelicTier.RARE, LandingSound.FLAT);
@@ -41,4 +44,16 @@ public class DogsDay extends AbstractEasyRelic {
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }
+
+
+    @Override
+    public void onRightClick() {
+        if (toggle) {
+            playAudio(ProAudio.bark1);
+        } else {
+            playAudio(ProAudio.bark2);
+        }
+        toggle = !toggle;
+    }
 }
+

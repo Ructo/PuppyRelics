@@ -6,10 +6,12 @@ import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
+import static puppyrelics.util.Wiz.playAudio;
 
-public class BlessingInDisguise extends AbstractEasyRelic {
+public class BlessingInDisguise extends AbstractEasyClickRelic {
     public static final String ID = makeID("BlessingInDisguise");
     private boolean triggeredThisTurn = false;
 
@@ -31,6 +33,11 @@ public class BlessingInDisguise extends AbstractEasyRelic {
             AbstractDungeon.actionManager.addToBottom(new DrawCardAction(AbstractDungeon.player, 1));
             triggeredThisTurn = true; // Set the flag to true after triggering the effect
         }
+    }
+
+    @Override
+    public void onRightClick() {
+        playAudio(ProAudio.squeak);
     }
 
     @Override
