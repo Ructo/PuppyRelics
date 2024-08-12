@@ -22,6 +22,7 @@ public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePow
     @Override
     public void atTurnStart() {
         doubledThisTurn = false;
+        beginLongPulse();
     }
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target) {
@@ -34,9 +35,11 @@ public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePow
             flash();
             power.amount *= 2;
             power.updateDescription();
+            stopPulse();
             doubledThisTurn = true;
             return stackAmount * 2;
         }
+
         return stackAmount;
     }
 
@@ -64,6 +67,6 @@ public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePow
     }
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.grass);
     }
 }

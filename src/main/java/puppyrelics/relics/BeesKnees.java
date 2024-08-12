@@ -62,7 +62,7 @@ public class BeesKnees extends AbstractEasyClickRelic implements BetterOnSmithRe
 
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.yippee);
     }
 
     @Override

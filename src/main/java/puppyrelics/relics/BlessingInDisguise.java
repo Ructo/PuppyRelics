@@ -37,7 +37,7 @@ public class BlessingInDisguise extends AbstractEasyClickRelic {
 
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.blessing);
     }
 
     @Override

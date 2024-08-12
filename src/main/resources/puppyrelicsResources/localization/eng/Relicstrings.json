@@ -98,7 +98,7 @@
     "NAME": "Hang In There",
     "FLAVOR": "You can do anything you put your mind to! Believe in yourself, you are great!",
     "DESCRIPTIONS": [
-      "Whenever you enter a #y? Room, heal #b3 HP."
+      "Whenever you enter a #y? Room, heal #b4 HP."
     ]
   },
   "${ModID}:Hyperactivity": {
@@ -149,7 +149,7 @@
     "NAME": "Ninja Puppy's Mask",
     "FLAVOR": "A mask that grants a ninja's technique. Smells like dog.",
     "DESCRIPTIONS": [
-      "Every time you play #b3 #yAttacks in a single turn, apply #b2 #yConstrict to a random enemy."
+      "Every time you play #b3 #yAttacks in a single turn, apply #b1 #yConstrict three times to a random enemy."
     ]
   },
   "${ModID}:NikTheGOAT": {

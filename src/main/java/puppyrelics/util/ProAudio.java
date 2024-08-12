@@ -23,6 +23,10 @@ public enum ProAudio {
     bark2,
     ninja,
     heavyblunt,
+    grass,
+    cash,
+    yippee,
+    blessing,
 
     /*
     Add any audio you add to your files here!

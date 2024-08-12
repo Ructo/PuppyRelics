@@ -27,10 +27,8 @@ public abstract class AbstractEasyClickRelic extends AbstractEasyRelic {
     }
 
     private void clickUpdate() {
-        if (!AbstractDungeon.isScreenUp && HitboxRightClick.rightClicked.get(this.hb)) {
-            if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+        if (HitboxRightClick.rightClicked.get(this.hb)) {
                 onRightClick();
-            }
         }
     }
 

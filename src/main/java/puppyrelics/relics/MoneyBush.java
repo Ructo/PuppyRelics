@@ -56,6 +56,6 @@ public class MoneyBush extends AbstractEasyClickRelic {
     }
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.cash);
     }
 }

@@ -21,7 +21,7 @@ public class HangInThere extends AbstractEasyClickRelic {
     public void onEnterRoom(AbstractRoom room) {
         if (room instanceof EventRoom) {
             flash();
-            AbstractDungeon.player.heal(3);
+            AbstractDungeon.player.heal(4);
         }
     }
 
@@ -36,6 +36,6 @@ public class HangInThere extends AbstractEasyClickRelic {
     }
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.cat1);
     }
 }

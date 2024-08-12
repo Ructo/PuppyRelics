@@ -4,7 +4,6 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.DrawCardNextTurnPower;
 import com.megacrit.cardcrawl.powers.EnergizedBluePower;
-import com.megacrit.cardcrawl.powers.EnergizedPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import puppyrelics.util.ProAudio;
 
@@ -13,6 +12,7 @@ import static puppyrelics.util.Wiz.playAudio;
 
 public class OneStone extends AbstractEasyClickRelic {
     public static final String ID = makeID("OneStone");
+    private boolean effectTriggered = false; // Flag to track if the effect was triggered
 
     public OneStone() {
         super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
@@ -28,6 +28,15 @@ public class OneStone extends AbstractEasyClickRelic {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
                     AbstractDungeon.player, AbstractDungeon.player, new DrawCardNextTurnPower(AbstractDungeon.player, 1), 1
             ));
+            effectTriggered = true; // Set the flag when the effect is triggered
+        }
+    }
+
+    @Override
+    public void atTurnStart() {
+        if (effectTriggered) {
+            flash(); // Flash at the start of the turn to indicate benefits were gained
+            effectTriggered = false; // Reset the flag after flashing
         }
     }
 
@@ -40,6 +49,7 @@ public class OneStone extends AbstractEasyClickRelic {
     public AbstractRelic makeCopy() {
         return new OneStone();
     }
+
     @Override
     public void onRightClick() {
         playAudio(ProAudio.squeak);

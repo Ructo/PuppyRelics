@@ -170,8 +170,6 @@ public class ModFile implements
                         UnlockTracker.markRelicAsSeen(relic.relicId);
                     }
                 });
-        BaseMod.addRelic(new RatRace(), RelicType.SHARED);
-        UnlockTracker.markRelicAsSeen(RatRace.ID);
         BaseMod.addRelic(new DarklightsStone(), RelicType.SHARED);
         UnlockTracker.markRelicAsSeen(DarklightsStone.ID);
     }

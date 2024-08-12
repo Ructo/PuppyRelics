@@ -32,7 +32,9 @@ public class NinjaPuppysMask extends AbstractEasyClickRelic {
                 flash();
                 AbstractMonster m = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
                 if (m != null) {
-                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, AbstractDungeon.player, new ConstrictedPower(m, AbstractDungeon.player, 2), 2));
+                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, AbstractDungeon.player, new ConstrictedPower(m, AbstractDungeon.player, 1), 1));
+                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, AbstractDungeon.player, new ConstrictedPower(m, AbstractDungeon.player, 1), 1));
+                    AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, AbstractDungeon.player, new ConstrictedPower(m, AbstractDungeon.player, 1), 1));
                 }
             }
         }
