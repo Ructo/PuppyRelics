@@ -1,5 +1,6 @@
 package puppyrelics.relics;
 
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
@@ -42,7 +43,9 @@ public class AdventurersMap extends AbstractEasyClickRelic implements CustomSava
     public Integer onSave() {
         return eventRoomCounter;
     }
-
+    public boolean canSpawn() {
+        return Settings.isEndless || AbstractDungeon.floorNum <= 35;
+    }
     @Override
     public void onLoad(Integer counter) {
         if (counter != null) {

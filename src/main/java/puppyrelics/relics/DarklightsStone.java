@@ -4,6 +4,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
@@ -124,6 +125,9 @@ public class DarklightsStone extends AbstractUniqueClickRelic implements BetterO
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
+    }
+    public boolean canSpawn() {
+        return Settings.isEndless || AbstractDungeon.floorNum <= 45;
     }
 
     @Override

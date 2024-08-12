@@ -1,5 +1,6 @@
 package puppyrelics.relics;
 
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -29,7 +30,9 @@ public class HangInThere extends AbstractEasyClickRelic {
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }
-
+    public boolean canSpawn() {
+        return Settings.isEndless || AbstractDungeon.floorNum <= 35;
+    }
     @Override
     public AbstractRelic makeCopy() {
         return new HangInThere();

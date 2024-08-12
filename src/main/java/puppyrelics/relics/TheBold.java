@@ -1,5 +1,6 @@
 package puppyrelics.relics;
 
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
@@ -29,6 +30,9 @@ public class TheBold extends AbstractEasyClickRelic {
         return DESCRIPTIONS[0];
     }
 
+    public boolean canSpawn() {
+        return Settings.isEndless || AbstractDungeon.floorNum <= 35;
+    }
     @Override
     public AbstractRelic makeCopy() {
         return new TheBold();

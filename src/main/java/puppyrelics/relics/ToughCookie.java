@@ -2,6 +2,7 @@ package puppyrelics.relics;
 
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster.EnemyType;
@@ -44,7 +45,9 @@ public class ToughCookie extends AbstractEasyClickRelic {
     public AbstractRelic makeCopy() {
         return new ToughCookie();
     }
-
+    public boolean canSpawn() {
+        return Settings.isEndless || AbstractDungeon.floorNum <= 40;
+    }
     @Override
     public void onRightClick() {
         long currentTime = System.currentTimeMillis();
