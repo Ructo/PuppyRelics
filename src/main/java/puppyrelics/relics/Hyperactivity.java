@@ -31,6 +31,6 @@ public class Hyperactivity extends AbstractEasyClickRelic {
     }
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.yippee);
     }
 }
