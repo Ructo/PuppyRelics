@@ -1,11 +1,15 @@
 package puppyrelics.relics;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import puppyrelics.util.ProAudio;
 
@@ -15,9 +19,7 @@ import static puppyrelics.util.Wiz.playAudio;
 public class UnturnedStone extends AbstractEasyClickRelic {
     public static final String ID = makeID("UnturnedStone");
 
-    private boolean handTriggered = false;
     private boolean drawPileTriggered = false;
-    private boolean hasDrawnInitialHand = false;
 
     public UnturnedStone() {
         super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
@@ -25,30 +27,57 @@ public class UnturnedStone extends AbstractEasyClickRelic {
 
     @Override
     public void atBattleStart() {
-        handTriggered = false;
         drawPileTriggered = false;
-        hasDrawnInitialHand = false;
     }
 
-    public void onPlayerDraw() {
-        hasDrawnInitialHand = true;
+    @Override
+    public void atTurnStart() {
+        drawPileTriggered = false;
+    }
+
+    @Override
+    public void onCardDraw(AbstractCard drawnCard) {
+        checkHandEmpty();
+    }
+
+    @Override
+    public void onExhaust(AbstractCard card) {
+        checkHandEmpty();
+    }
+
+    @Override
+    public void onManualDiscard() {
+        checkHandEmpty();
+    }
+
+    private void checkHandEmpty() {
+        if (AbstractDungeon.player.hand.isEmpty()) {
+            triggerEffect();
+        }
     }
 
     @Override
     public void update() {
         super.update();
+
+
         if (CardCrawlGame.isInARun() && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
                 && !AbstractDungeon.actionManager.turnHasEnded) {
-            if (hasDrawnInitialHand && !handTriggered && AbstractDungeon.player.hand.isEmpty()) {
-                flash();
-                AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(AbstractDungeon.player, 7, DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-                handTriggered = true; // Set the flag to true after triggering the effect
-            }
+
+
             if (!drawPileTriggered && AbstractDungeon.player.drawPile.isEmpty()) {
-                flash();
-                AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(AbstractDungeon.player, 7, DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
-                drawPileTriggered = true; // Set the flag to true after triggering the effect
+                triggerEffect();
+                drawPileTriggered = true;
             }
+        }
+    }
+
+
+    private void triggerEffect() {
+        AbstractMonster target = AbstractDungeon.getMonsters().getRandomMonster(true);
+        if (target != null) {
+            flash();
+            AbstractDungeon.actionManager.addToBottom(new DamageAction(target, new DamageInfo(AbstractDungeon.player, 5, DamageInfo.DamageType.THORNS), AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         }
     }
 
@@ -61,6 +90,7 @@ public class UnturnedStone extends AbstractEasyClickRelic {
     public AbstractRelic makeCopy() {
         return new UnturnedStone();
     }
+
     @Override
     public void onRightClick() {
         playAudio(ProAudio.squeak);
