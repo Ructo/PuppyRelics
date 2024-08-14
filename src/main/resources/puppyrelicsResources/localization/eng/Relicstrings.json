@@ -192,7 +192,7 @@
     "NAME": "Unturned Stone",
     "FLAVOR": "There's always the ability to deal damage... you just gotta look for it sometimes.",
     "DESCRIPTIONS": [
-      "Whenever your hand or draw pile are empty, deal #b5 damage to a random enemy."
+      "Whenever you shuffle your draw pile, deal #b8 damage to all enemies."
     ]
   }
 }
