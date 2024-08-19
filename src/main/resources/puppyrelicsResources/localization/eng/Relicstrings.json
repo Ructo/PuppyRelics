@@ -70,7 +70,7 @@
     "NAME": "Dog's Day",
     "FLAVOR": "Every dog has its day.",
     "DESCRIPTIONS": [
-      "Once per combat, when your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, and draw #b3 additional cards."
+      "Once per combat, when your HP is below #b50%, gain #b2 #yStrength, #b2 #yDexterity, #b2 #yFocus, and draw #b3 additional cards."
     ]
   },
   "${ModID}:FiddleOfFitness": {
