@@ -19,16 +19,22 @@ public class Hyperactivity extends AbstractEasyClickRelic {
     @Override
     public void onExhaust(AbstractCard card) {
         exhaustCounter++;
-        this.counter = exhaustCounter;
-        if (exhaustCounter % 4 == 0) {
+        this.counter = exhaustCounter; // Update the visible counter
+
+        // Trigger when 4 cards have been exhausted
+        if (exhaustCounter >= 4) {
             flash();
             AbstractDungeon.player.gainEnergy(1);
+            exhaustCounter = 0;  // Reset the counter after triggering
+            this.counter = exhaustCounter; // Update the visible counter
         }
     }
+
     @Override
     public void onEquip() {
         this.counter = exhaustCounter;
     }
+
     @Override
     public void onRightClick() {
         playAudio(ProAudio.yippee);

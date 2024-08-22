@@ -10,7 +10,7 @@
     "NAME": "Adventurer's Map",
     "FLAVOR": "Whether fighting or exploring, you can find what you need! Flexibility is the real treasure!",
     "DESCRIPTIONS": [
-      "Every 3rd #y? Room entered, receive a card reward."
+      "Every 2nd #y? Room entered, receive a card reward."
     ]
   },
   "${ModID}:AgmensHat": {
@@ -38,7 +38,7 @@
     "NAME": "Bubble Burster",
     "FLAVOR": "Enemies think they are so tough. Time to burst their bubbles by showing them who's the real boss character.",
     "DESCRIPTIONS": [
-      "At the start of combat, gain #b1 Strength. Gain #b1 additional Strength for boss fights."
+      "At the start of combat, gain #b1 Strength, #b1 Dexterity, and #b1 Focus. Double the amount in boss rooms."
     ]
   },
   "${ModID}:CatsPajamas": {
@@ -91,7 +91,7 @@
     "NAME": "Greener Grass",
     "FLAVOR": "For once, it's on your side instead of the other.",
     "DESCRIPTIONS": [
-      "Double the first #yBuff you gain each turn, lose 1 max [E] "
+      "Double the first #yBuff you gain each turn."
     ]
   },
   "${ModID}:HangInThere": {
@@ -105,12 +105,12 @@
     "NAME": "Hyperactivity",
     "FLAVOR": "Sure, you're exhausted, but there's still a small burst of energy you can eke out.",
     "DESCRIPTIONS": [
-      "Whenever you exhaust #b4 cards, gain 1 [E]"
+      "Whenever you exhaust #b4 cards, gain 1 [E] . Counter does not reset between combats."
     ]
   },
   "${ModID}:IcingOnThePotion": {
     "NAME": "Icing On The Potion",
-    "FLAVOR": "We're not sure who put icing on this potion, but something about the flavor draws you in.",
+    "FLAVOR": "We're not sure who put icing on this potion, but something about the flavor DRAWS you in.",
     "DESCRIPTIONS": [
       "Whenever you drink a potion, draw a card. If you aren't in combat, do so next combat."
     ]
@@ -133,9 +133,8 @@
     "NAME": "Money Bush",
     "FLAVOR": "Because money doesn't grow on trees. It grows on bushes.",
     "DESCRIPTIONS": [
-      "Whenever you climb a floor, gain #y5 gold. Upon pickup, this benefit is retroactive. (#y5 gold)",
-      "Whenever you climb a floor, gain #y5 gold. You have gained #y",
-      "[] gold."
+      "Whenever you lose gold, refund #y30% of the amount lost.",
+      "Whenever you climb a floor, gain #y5 gold. Upon pickup, this benefit is retroactive."
     ]
   },
   "${ModID}:MonsterDrops": {

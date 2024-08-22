@@ -14,16 +14,23 @@ import static puppyrelics.util.Wiz.playAudio;
 public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePowerRelic {
     public static final String ID = makeID("GreenerGrass");
     private boolean doubledThisTurn = false;
-    private boolean energyReducedThisCombat = false;
 
     public GreenerGrass() {
         super(ID, RelicTier.BOSS, LandingSound.FLAT);
     }
+
     @Override
     public void atTurnStart() {
         doubledThisTurn = false;
-        beginLongPulse();
+
+        // Only start pulsing if in combat
+        if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            beginLongPulse();
+        } else {
+            stopPulse(); // Ensure pulse is stopped when not in combat
+        }
     }
+
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target) {
         return true;
@@ -35,24 +42,12 @@ public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePow
             flash();
             power.amount *= 2;
             power.updateDescription();
-            stopPulse();
+            stopPulse();  // Stop pulsing after effect is triggered
             doubledThisTurn = true;
             return stackAmount * 2;
         }
 
         return stackAmount;
-    }
-
-    @Override
-    public void onEquip() {
-        // Reduce energy master immediately when the relic is equipped
-        AbstractDungeon.player.energy.energyMaster--;
-    }
-
-    @Override
-    public void onUnequip() {
-        // Restore energy master when the relic is unequipped
-        AbstractDungeon.player.energy.energyMaster++;
     }
 
     @Override
@@ -63,8 +58,8 @@ public class GreenerGrass extends AbstractEasyClickRelic implements OnReceivePow
     @Override
     public AbstractRelic makeCopy() {
         return new GreenerGrass();
-
     }
+
     @Override
     public void onRightClick() {
         playAudio(ProAudio.grass);

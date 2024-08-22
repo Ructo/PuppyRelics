@@ -21,10 +21,7 @@ import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import puppyrelics.cards.RatRaceCard;
-import puppyrelics.relics.AbstractEasyRelic;
-import puppyrelics.relics.DarklightsStone;
-import puppyrelics.relics.NikTheGOAT;
-import puppyrelics.relics.RatRace;
+import puppyrelics.relics.*;
 import puppyrelics.util.ProAudio;
 
 import java.io.IOException;
@@ -96,6 +93,8 @@ public class ModFile implements
         defaultSettings.setProperty(ENABLE_MOD, Boolean.toString(modEnabled));
         defaultSettings.setProperty(LEGACY_MODE, Boolean.toString(legacyMode));
         defaultSettings.setProperty(MOUSE_RADIUS, String.valueOf(mouseRadius));
+        defaultSettings.setProperty(MONEY_BUSH_LEGACY_MODE, Boolean.toString(moneyBushLegacyMode));
+
 
         try {
             LOConfig = new SpireConfig(modID, FILE_NAME, defaultSettings);
@@ -109,16 +108,20 @@ public class ModFile implements
             modEnabled = LOConfig.getBool(ENABLE_MOD);
             legacyMode = LOConfig.getBool(LEGACY_MODE);
             mouseRadius = LOConfig.getInt(MOUSE_RADIUS);
+            moneyBushLegacyMode = LOConfig.getBool(MONEY_BUSH_LEGACY_MODE);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    public static boolean moneyBushLegacyMode = false; // Add a boolean to track MoneyBush legacy mode
+    private static final String MONEY_BUSH_LEGACY_MODE = "MoneyBushLegacyMode"; // Add a constant for config
 
     private void saveConfig() {
         try {
             LOConfig.setBool(ENABLE_MOD, modEnabled);
             LOConfig.setBool(LEGACY_MODE, legacyMode);
             LOConfig.setInt(MOUSE_RADIUS, mouseRadius);
+            LOConfig.setBool(MONEY_BUSH_LEGACY_MODE, moneyBushLegacyMode);
             LOConfig.save();
         } catch (IOException e) {
             e.printStackTrace();
@@ -216,6 +219,7 @@ public class ModFile implements
         loadConfig();
         try {
             legacyMode = LOConfig.getBool(LEGACY_MODE);
+            moneyBushLegacyMode = LOConfig.getBool(MONEY_BUSH_LEGACY_MODE); // Load MoneyBush legacy mode
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -235,14 +239,14 @@ public class ModFile implements
 
                     // Check the state of legacyMode
                     if (legacyMode) {
-                        NikTheGOAT compendiumRelic = (NikTheGOAT) RelicLibrary.getRelic(NikTheGOAT.ID);
-                        if (compendiumRelic != null) {
-                            compendiumRelic.refreshDescription();
+                        NikTheGOAT nikTheGoatLegacyRelic = (NikTheGOAT) RelicLibrary.getRelic(NikTheGOAT.ID);
+                        if (nikTheGoatLegacyRelic != null) {
+                            nikTheGoatLegacyRelic.refreshDescription();
                         }
                     } else {
-                        NikTheGOAT compendiumRelic = (NikTheGOAT) RelicLibrary.getRelic(NikTheGOAT.ID);
-                        if (compendiumRelic != null) {
-                            compendiumRelic.refreshDescription();
+                        NikTheGOAT nikTheGoatLegacyRelic = (NikTheGOAT) RelicLibrary.getRelic(NikTheGOAT.ID);
+                        if (nikTheGoatLegacyRelic != null) {
+                            nikTheGoatLegacyRelic.refreshDescription();
                         }
                     }
 
@@ -255,6 +259,40 @@ public class ModFile implements
                 }
         );
         settingsPanel.addUIElement(legacyToggleButton);
+        ModLabeledToggleButton legacyMoneyBushToggleButton = new ModLabeledToggleButton(
+                "Enable Legacy MoneyBush Mode",
+                350.0f,
+                700.0f, // Adjust position
+                Settings.CREAM_COLOR,
+                FontHelper.charDescFont,
+                moneyBushLegacyMode,
+                settingsPanel,
+                (label) -> {},
+                (button) -> {
+                    moneyBushLegacyMode = button.enabled;
+
+                    // Check the state of legacyMode
+                    if (moneyBushLegacyMode) {
+                    MoneyBush moneyBushLegacyRelic = (MoneyBush) RelicLibrary.getRelic(MoneyBush.ID);
+                    if (moneyBushLegacyRelic != null) {
+                        moneyBushLegacyRelic.refreshDescription();
+                    }
+                    } else {
+                        MoneyBush moneyBushLegacyRelic = (MoneyBush) RelicLibrary.getRelic(MoneyBush.ID);
+                        if (moneyBushLegacyRelic != null) {
+                            moneyBushLegacyRelic.refreshDescription();
+                        }
+                    }
+                    // Save the MoneyBush legacy mode state
+                    try {
+                        LOConfig.setBool(MONEY_BUSH_LEGACY_MODE, moneyBushLegacyMode);
+                        LOConfig.save();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+        settingsPanel.addUIElement(legacyMoneyBushToggleButton);
 
 
         Texture badgeTexture = new Texture(Gdx.files.internal("puppyrelicsResources/images/ui/badge.png"));

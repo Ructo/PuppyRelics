@@ -13,7 +13,7 @@ import static puppyrelics.util.Wiz.playAudio;
 
 public class AdventurersMap extends AbstractEasyClickRelic implements CustomSavable<Integer> {
     public static final String ID = makeID("AdventurersMap");
-    private static final int EVENT_THRESHOLD = 3;
+    private static final int EVENT_THRESHOLD = 2;
     private int eventRoomCounter = 0;
 
     public AdventurersMap() {

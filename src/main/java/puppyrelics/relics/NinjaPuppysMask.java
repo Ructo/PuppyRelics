@@ -17,17 +17,20 @@ public class NinjaPuppysMask extends AbstractEasyClickRelic {
 
     public NinjaPuppysMask() {
         super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
+        this.counter = 0;
     }
 
     @Override
     public void atTurnStart() {
         attackCounter = 0; // Reset the counter at the start of each turn
+        setCounter(0); // Reset the displayed counter as well
     }
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (card.type == AbstractCard.CardType.ATTACK) {
             attackCounter++;
+            setCounter(attackCounter % 3);
             if (attackCounter % 3 == 0) {
                 flash();
                 AbstractMonster m = AbstractDungeon.getMonsters().getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
@@ -42,5 +45,9 @@ public class NinjaPuppysMask extends AbstractEasyClickRelic {
     @Override
     public void onRightClick() {
         playAudio(ProAudio.ninja);
+    }
+    @Override
+    public String getUpdatedDescription() {
+        return DESCRIPTIONS[0];
     }
 }

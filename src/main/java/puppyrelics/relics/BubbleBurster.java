@@ -2,6 +2,8 @@ package puppyrelics.relics;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.DexterityPower;
+import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -22,12 +24,14 @@ public class BubbleBurster extends AbstractEasyClickRelic {
     @Override
     public void atBattleStart() {
         flash();
-        int strengthAmount = 1;
+        int powerAmount = 1;
         AbstractRoom currRoom = AbstractDungeon.getCurrRoom();
         if (currRoom instanceof MonsterRoomBoss) {
-            strengthAmount++;
+            powerAmount++;
         }
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, strengthAmount), strengthAmount));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, powerAmount), powerAmount));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, powerAmount), powerAmount));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new FocusPower(AbstractDungeon.player, powerAmount), powerAmount));
     }
 
     @Override
