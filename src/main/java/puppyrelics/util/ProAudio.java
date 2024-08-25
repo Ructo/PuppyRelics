@@ -27,6 +27,7 @@ public enum ProAudio {
     cash,
     yippee,
     blessing,
+    sureaboutthat,
 
     /*
     Add any audio you add to your files here!

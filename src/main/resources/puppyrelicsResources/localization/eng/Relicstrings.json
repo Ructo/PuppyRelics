@@ -41,6 +41,13 @@
       "At the start of combat, gain #b1 Strength, #b1 Dexterity, and #b1 Focus. Double the amount in boss rooms."
     ]
   },
+  "${ModID}:BurningBridge": {
+    "NAME": "Burning Bridge",
+    "FLAVOR": "They say you shouldn't burn bridges, but we'll burn that bridge when we get there.",
+    "DESCRIPTIONS": [
+      "If you cannot play a card, pay the difference of cost in self-damage. Cards played this way are Exhausted."
+    ]
+  },
   "${ModID}:CatsPajamas": {
     "NAME": "Cat's Pajamas",
     "FLAVOR": "The power of nine lives in some silky pajamas. They seem oddly lucky.",

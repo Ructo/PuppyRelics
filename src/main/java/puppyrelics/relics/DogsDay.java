@@ -24,6 +24,10 @@ public class DogsDay extends AbstractEasyClickRelic {
     public void atPreBattle() {
         usedThisCombat = false; // Reset the flag at the start of each combat
         checkAndTriggerEffect(); // Check health at the start of combat
+        if (shouldFlash()) {
+            flash(); // Flash at the start of combat if health is below threshold
+            stopPulse(); // Stop pulsing after combat starts
+        }
     }
 
     @Override
@@ -33,7 +37,6 @@ public class DogsDay extends AbstractEasyClickRelic {
 
     private void checkAndTriggerEffect() {
         if (!usedThisCombat && AbstractDungeon.player.currentHealth <= (AbstractDungeon.player.maxHealth * 0.5)) {
-            flash();
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, 2), 2));
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, 2), 2));
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new FocusPower(AbstractDungeon.player, 2), 2));
@@ -43,10 +46,23 @@ public class DogsDay extends AbstractEasyClickRelic {
     }
 
     @Override
+    public void update() {
+        super.update();
+        if (shouldFlash() && !this.pulse) {
+            beginLongPulse(); // Start pulsing if health is below threshold outside of combat
+        } else if (!shouldFlash() && this.pulse) {
+            stopPulse(); // Stop pulsing when the condition no longer applies
+        }
+    }
+
+    private boolean shouldFlash() {
+        return AbstractDungeon.player.currentHealth <= (AbstractDungeon.player.maxHealth * 0.5);
+    }
+
+    @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
     }
-
 
     @Override
     public void onRightClick() {
@@ -58,4 +74,3 @@ public class DogsDay extends AbstractEasyClickRelic {
         toggle = !toggle;
     }
 }
-

@@ -22,6 +22,7 @@ public class LousyRelic extends AbstractEasyClickRelic {
     @Override
     public void atBattleStart() {
         usedThisCombat = false; // Reset the flag at the start of each combat
+        grayscale = false; // Reset the relic's appearance
     }
 
     @Override
@@ -31,12 +32,15 @@ public class LousyRelic extends AbstractEasyClickRelic {
             AbstractDungeon.actionManager.addToTop(new GainBlockAction(AbstractDungeon.player, AbstractDungeon.player, 12));
             AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new BlurPower(AbstractDungeon.player, 1), 1));
             usedThisCombat = true; // Set the flag to true after triggering the effect
+            grayscale = true; // Disable the relic's visual appearance
         }
     }
 
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        if (!usedThisCombat) { // Prevent interaction if already used this combat
+            playAudio(ProAudio.squeak);
+        }
     }
 
     @Override

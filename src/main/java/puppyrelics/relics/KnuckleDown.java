@@ -13,20 +13,23 @@ import static puppyrelics.util.Wiz.playAudio;
 
 public class KnuckleDown extends AbstractEasyClickRelic {
     public static final String ID = makeID("KnuckleDown");
-
     private int skillCount = 0;
-
     public KnuckleDown() {
         super(ID, RelicTier.RARE, LandingSound.FLAT);
+        this.counter = 0; // Initialize the counter
+
     }
 
     @Override
     public void onUseCard(AbstractCard card, UseCardAction action) {
         if (card.type == AbstractCard.CardType.SKILL) {
             skillCount++;
+            this.counter = skillCount; // Update the counter to reflect the number of skills used
             if (skillCount == 3) {
                 removeRandomDebuff();
+                flash();
                 skillCount = 0;
+                this.counter = 0; // Reset the counter when the effect triggers
             }
         }
     }
@@ -34,6 +37,7 @@ public class KnuckleDown extends AbstractEasyClickRelic {
     @Override
     public void atTurnStart() {
         skillCount = 0;
+        this.counter = 0; // Reset the counter at the start of each turn
     }
 
     private void removeRandomDebuff() {
@@ -57,6 +61,7 @@ public class KnuckleDown extends AbstractEasyClickRelic {
     public AbstractRelic makeCopy() {
         return new KnuckleDown();
     }
+
     @Override
     public void onRightClick() {
         playAudio(ProAudio.heavyblunt);

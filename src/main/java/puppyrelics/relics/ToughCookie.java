@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster.EnemyType;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.AbstractRelic.LandingSound;
 import com.megacrit.cardcrawl.relics.AbstractRelic.RelicTier;
+import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import puppyrelics.relics.AbstractEasyRelic;
 import puppyrelics.util.ProAudio;
 
@@ -31,12 +32,14 @@ public class ToughCookie extends AbstractEasyClickRelic {
     @Override
     public void atBattleStart() {
 
-        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            if (m.type == EnemyType.ELITE) {
-                this.flash();
-                this.addToTop(new HealAction(AbstractDungeon.player, AbstractDungeon.player, HEAL_AMT, 0.0F));
-                this.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-                break; // Trigger only once per battle, no need to continue checking
+        if (AbstractDungeon.getCurrRoom().event != null && AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite) {
+            for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                if (m.type == EnemyType.ELITE) {
+                    this.flash();
+                    this.addToTop(new HealAction(AbstractDungeon.player, AbstractDungeon.player, HEAL_AMT, 0.0F));
+                    this.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+                    break; // Trigger only once per battle, no need to continue checking
+                }
             }
         }
     }
