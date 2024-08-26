@@ -19,7 +19,7 @@ public class BurningBridge extends AbstractEasyClickRelic implements AlternateCa
     private static final int HP_PER_ENERGY = 1; // Amount of HP lost per missing energy
 
     public BurningBridge() {
-        super(ID, RelicTier.RARE, LandingSound.HEAVY);
+        super(ID, RelicTier.BOSS, LandingSound.HEAVY);
     }
 
     @Override

@@ -45,7 +45,7 @@
     "NAME": "Burning Bridge",
     "FLAVOR": "They say you shouldn't burn bridges, but we'll burn that bridge when we get there.",
     "DESCRIPTIONS": [
-      "If you cannot play a card, pay the difference of cost in self-damage. Cards played this way are Exhausted."
+      "If you cannot play a card, pay the difference of cost in HP loss. Cards played this way are Exhausted."
     ]
   },
   "${ModID}:CatsPajamas": {
