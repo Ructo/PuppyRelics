@@ -4,6 +4,7 @@ import basemod.AutoAdd;
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
+import basemod.helpers.CardBorderGlowManager;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
@@ -14,11 +15,14 @@ import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import puppyrelics.cards.RatRaceCard;
 import puppyrelics.relics.*;
@@ -214,6 +218,7 @@ public class ModFile implements
         }
     }
 
+    @Override
     public void receivePostInitialize() {
         // Ensure configuration is loaded before initializing the UI
         loadConfig();
@@ -273,10 +278,10 @@ public class ModFile implements
 
                     // Check the state of legacyMode
                     if (moneyBushLegacyMode) {
-                    MoneyBush moneyBushLegacyRelic = (MoneyBush) RelicLibrary.getRelic(MoneyBush.ID);
-                    if (moneyBushLegacyRelic != null) {
-                        moneyBushLegacyRelic.refreshDescription();
-                    }
+                        MoneyBush moneyBushLegacyRelic = (MoneyBush) RelicLibrary.getRelic(MoneyBush.ID);
+                        if (moneyBushLegacyRelic != null) {
+                            moneyBushLegacyRelic.refreshDescription();
+                        }
                     } else {
                         MoneyBush moneyBushLegacyRelic = (MoneyBush) RelicLibrary.getRelic(MoneyBush.ID);
                         if (moneyBushLegacyRelic != null) {
@@ -297,5 +302,36 @@ public class ModFile implements
 
         Texture badgeTexture = new Texture(Gdx.files.internal("puppyrelicsResources/images/ui/badge.png"));
         BaseMod.registerModBadge(badgeTexture, "Puppy Relics", "Ninja Puppy", "A collection of relics by NinjaPuppy, some are based on friends, some are idioms. I like to jokingly call it: Idioms and Idiots, with love.", settingsPanel);
+
+        // Register the global glow logic for cards with the BurningBridge relic
+        CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
+            @Override
+            public boolean test(AbstractCard c) {
+                return shouldGlowRed(c);
+            }
+
+            @Override
+            public Color getColor(AbstractCard c) {
+                return Color.RED.cpy(); // Return the red color for the glow
+            }
+
+            @Override
+            public String glowID() {
+                return "puppyrelics:burningbridgeglow"; // Unique ID for this glow
+            }
+        });
     }
+
+    private boolean shouldGlowRed(AbstractCard card) {
+        // Ensure that the player exists and has the BurningBridge relic
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BurningBridge.ID)) {
+            int availableEnergy = EnergyPanel.totalCount;
+            int energyDeficit = card.costForTurn - availableEnergy;
+
+            // Use freeToPlay() instead of costForTurn and freeToPlayOnce checks
+            return energyDeficit > 0 && !card.freeToPlay();
+        }
+        return false;
+    }
+
 }
