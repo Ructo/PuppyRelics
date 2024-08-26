@@ -48,15 +48,20 @@ public class DogsDay extends AbstractEasyClickRelic {
     @Override
     public void update() {
         super.update();
-        if (shouldFlash() && !this.pulse) {
-            beginLongPulse(); // Start pulsing if health is below threshold outside of combat
-        } else if (!shouldFlash() && this.pulse) {
-            stopPulse(); // Stop pulsing when the condition no longer applies
+
+        // Ensure we're in a run before checking health and starting pulsing
+        if (AbstractDungeon.isPlayerInDungeon()) {
+            if (shouldFlash() && !this.pulse) {
+                beginLongPulse(); // Start pulsing if health is below threshold outside of combat
+            } else if (!shouldFlash() && this.pulse) {
+                stopPulse(); // Stop pulsing when the condition no longer applies
+            }
         }
     }
 
     private boolean shouldFlash() {
-        return AbstractDungeon.player.currentHealth <= (AbstractDungeon.player.maxHealth * 0.5);
+        // Ensure we're in a run before checking health
+        return AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player.currentHealth <= (AbstractDungeon.player.maxHealth * 0.5);
     }
 
     @Override
