@@ -2,6 +2,7 @@ package puppyrelics.relics;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -25,15 +26,26 @@ public class BubbleBurster extends AbstractEasyClickRelic {
     public void atBattleStart() {
         flash();
         int powerAmount = 1;
-        AbstractRoom currRoom = AbstractDungeon.getCurrRoom();
-        if (currRoom instanceof MonsterRoomBoss) {
+
+        if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomBoss ||
+                (AbstractDungeon.getCurrRoom().event != null && isBossInEvent())) {
+            // Double the power amount for boss rooms or event rooms with bosses
             powerAmount++;
         }
+
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, powerAmount), powerAmount));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, powerAmount), powerAmount));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new FocusPower(AbstractDungeon.player, powerAmount), powerAmount));
     }
 
+    private boolean isBossInEvent() {
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            if (m.type == AbstractMonster.EnemyType.BOSS) {
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];

@@ -31,8 +31,7 @@ public class ToughCookie extends AbstractEasyClickRelic {
 
     @Override
     public void atBattleStart() {
-
-        if (AbstractDungeon.getCurrRoom().event != null && AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite) {
+        if (AbstractDungeon.getCurrRoom() instanceof MonsterRoomElite || AbstractDungeon.getCurrRoom().event != null) {
             for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
                 if (m.type == EnemyType.ELITE) {
                     this.flash();
@@ -43,6 +42,7 @@ public class ToughCookie extends AbstractEasyClickRelic {
             }
         }
     }
+
 
     @Override
     public AbstractRelic makeCopy() {

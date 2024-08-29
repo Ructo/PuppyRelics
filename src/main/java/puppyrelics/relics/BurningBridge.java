@@ -3,12 +3,10 @@ package puppyrelics.relics;
 import basemod.abstracts.CustomRelic;
 import basemod.interfaces.AlternateCardCostModifier;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
@@ -16,7 +14,6 @@ import static puppyrelics.util.Wiz.*;
 
 public class BurningBridge extends AbstractEasyClickRelic implements AlternateCardCostModifier {
     public static final String ID = makeID("BurningBridge");
-    private static final int HP_PER_ENERGY = 1; // Amount of HP lost per missing energy
 
     public BurningBridge() {
         super(ID, RelicTier.BOSS, LandingSound.HEAVY);
@@ -24,6 +21,12 @@ public class BurningBridge extends AbstractEasyClickRelic implements AlternateCa
 
     @Override
     public int getAlternateResource(AbstractCard card) {
+        // For X-cost cards, do not override the normal resource behavior
+        if (card.costForTurn == -1) {
+            return 0; // Do not provide the alternate resource for X-cost cards
+        }
+
+        // Provide an infinite alternate resource for non-X-cost cards
         return 999;
     }
 
@@ -31,26 +34,34 @@ public class BurningBridge extends AbstractEasyClickRelic implements AlternateCa
     public int spendAlternateCost(AbstractCard card, int costToSpend) {
         AbstractPlayer player = AbstractDungeon.player;
 
-        if (card.costForTurn >= 0 && card.cost >= 0) {
-            this.flash();
-            atb(new LoseHPAction(adp(), adp(), costToSpend * HP_PER_ENERGY));
-        }
-        return costToSpend;
-    }
+        // Only apply the alternate cost if the card has a valid cost and is not an X-cost card
+        if (card.costForTurn != -1 && card.costForTurn >= 0 && card.cost >= 0) {
+            // Calculate the energy deficit for the card
+            int energyDeficit = costToSpend;
 
-    @Override
-    public void onUseCard(AbstractCard card, UseCardAction action) {
-        // Check if the alternate cost (HP) was applied
-        if (card.costForTurn > EnergyPanel.totalCount && !card.freeToPlay()) {
-            this.flash();
-            // Exhaust the card after use if the alternate cost was applied
-            action.exhaustCard = true;
+            // Take damage equal to the current counter value + the energy deficit for this card
+            int totalDamage = this.counter;
+
+            if (totalDamage > 0) {
+                this.flash();
+                atb(new LoseHPAction(adp(), adp(), totalDamage));
+            }
+
+            // Update the relic counter by adding the energy deficit for this card
+            this.counter += energyDeficit;
         }
+
+        return costToSpend;
     }
 
     @Override
     public String getUpdatedDescription() {
         return DESCRIPTIONS[0];
+    }
+
+    @Override
+    public void onEquip() {
+        this.counter = 0; // Initialize the counter to 0 when the relic is equipped
     }
 
     @Override
