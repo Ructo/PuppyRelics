@@ -16,7 +16,7 @@ public class BurningBridge extends AbstractEasyClickRelic implements AlternateCa
     public static final String ID = makeID("BurningBridge");
 
     public BurningBridge() {
-        super(ID, RelicTier.BOSS, LandingSound.HEAVY);
+        super(ID, RelicTier.SHOP, LandingSound.HEAVY);
     }
 
     @Override
