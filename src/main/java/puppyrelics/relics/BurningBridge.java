@@ -18,7 +18,10 @@ public class BurningBridge extends AbstractEasyClickRelic implements AlternateCa
     public BurningBridge() {
         super(ID, RelicTier.SHOP, LandingSound.HEAVY);
     }
-
+    @Override
+    public void atBattleStart() {
+        this.counter = 0; // Reset the counter at the start of each combat
+    }
     @Override
     public int getAlternateResource(AbstractCard card) {
         // For X-cost cards, do not override the normal resource behavior
@@ -40,7 +43,7 @@ public class BurningBridge extends AbstractEasyClickRelic implements AlternateCa
             int energyDeficit = costToSpend;
 
             // Take damage equal to the current counter value + the energy deficit for this card
-            int totalDamage = this.counter;
+            int totalDamage = this.counter + energyDeficit;
 
             if (totalDamage > 0) {
                 this.flash();

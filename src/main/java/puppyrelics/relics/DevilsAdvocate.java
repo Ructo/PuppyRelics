@@ -2,6 +2,8 @@ package puppyrelics.relics;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
+import com.megacrit.cardcrawl.actions.utility.UseCardAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,6 +19,7 @@ public class DevilsAdvocate extends AbstractEasyClickRelic {
     public static final String ID = makeID("DevilsAdvocate");
 
     private boolean readyToTrigger = false; // Flag to indicate if the relic is ready to grant temporary HP
+    private boolean isAttackCard = false;
 
     public DevilsAdvocate() {
         super(ID, RelicTier.BOSS, LandingSound.FLAT);
@@ -39,8 +42,14 @@ public class DevilsAdvocate extends AbstractEasyClickRelic {
     }
 
     @Override
+    public void onUseCard(AbstractCard card, UseCardAction action) {
+        isAttackCard = card.type == AbstractCard.CardType.ATTACK;
+        }
+
+
+    @Override
     public void onAttack(DamageInfo info, int damageAmount, AbstractCreature target) {
-        if (readyToTrigger && damageAmount > 0 && info.owner == AbstractDungeon.player) {
+        if (readyToTrigger && damageAmount > 0 && info.owner == AbstractDungeon.player && isAttackCard) {
             int unblockedDamage = Math.max(0, damageAmount - target.currentBlock); // Calculate unblocked damage
             if (unblockedDamage > 0) {
                 int tempHPAmount = (int) (unblockedDamage * 0.5);
