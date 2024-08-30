@@ -45,7 +45,7 @@
     "NAME": "Burning Bridge",
     "FLAVOR": "They say you shouldn't burn bridges, but we'll burn that bridge when we get there.",
     "DESCRIPTIONS": [
-      "If you cannot play a card, pay the difference of cost in HP loss in total deficits each time you play beyond your available energy."
+      "If you cannot play a card, pay the difference of cost in HP loss in total deficits each time you play beyond your available energy. Resets each combat."
     ]
   },
   "${ModID}:CatsPajamas": {
@@ -70,7 +70,7 @@
     "NAME": "Devil's Advocate",
     "FLAVOR": "What a compelling argument. I have a simple rebuttal... I take back what is mine.",
     "DESCRIPTIONS": [
-      "When you lose HP, gain temporary HP for #b50% of the next damage dealt by you."
+      "When you lose HP, gain temporary HP for #b50% of the next attack damage dealt by you."
     ]
   },
   "${ModID}:DogsDay": {
