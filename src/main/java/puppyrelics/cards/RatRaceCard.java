@@ -24,11 +24,12 @@ public class RatRaceCard extends CustomCard {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, AbstractCard.CardType.SKILL, AbstractCard.CardColor.COLORLESS, AbstractCard.CardRarity.SPECIAL, AbstractCard.CardTarget.SELF);
         this.exhaust = true;
         this.isEthereal = true;
+        baseMagicNumber = magicNumber = 1;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new GainEnergyAction(1));
+        addToBot(new GainEnergyAction(magicNumber));
         addToBot(new MakeTempCardInDrawPileAction(new Wound(), 1, true, true));
     }
 
@@ -41,6 +42,9 @@ public class RatRaceCard extends CustomCard {
     public void upgrade() {
         if (!upgraded) {
             upgradeName();
+            upgradeMagicNumber(1);
+            this.rawDescription = cardStrings.UPGRADE_DESCRIPTION;
+            initializeDescription();
         }
     }
 }

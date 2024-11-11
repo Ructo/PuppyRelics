@@ -2,6 +2,7 @@ package puppyrelics.relics;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.FocusPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
@@ -49,8 +50,8 @@ public class DogsDay extends AbstractEasyClickRelic {
     public void update() {
         super.update();
 
-        // Ensure we're in a run before checking health and starting pulsing
-        if (AbstractDungeon.isPlayerInDungeon()) {
+        // Ensure we're in a run and the player still exists before checking health and starting pulsing
+        if (CardCrawlGame.isInARun() && AbstractDungeon.isPlayerInDungeon() && AbstractDungeon.player != null && !AbstractDungeon.player.isDead) {
             if (shouldFlash() && !this.pulse) {
                 beginLongPulse(); // Start pulsing if health is below threshold outside of combat
             } else if (!shouldFlash() && this.pulse) {
