@@ -58,6 +58,10 @@ public class BeesKnees extends AbstractEasyClickRelic implements BetterOnSmithRe
             AbstractDungeon.topLevelEffects.add(new ShowCardBrieflyEffect(randomCardToUpgrade.makeStatEquivalentCopy(), xPos, yPos));
             AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(xPos, yPos));
         }
+        else {
+                // Heal the player if no cards are left to upgrade
+                AbstractDungeon.player.heal(30);
+            }
     }
 
     @Override

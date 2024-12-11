@@ -28,6 +28,8 @@ public enum ProAudio {
     yippee,
     blessing,
     sureaboutthat,
+    welp,
+
 
     /*
     Add any audio you add to your files here!

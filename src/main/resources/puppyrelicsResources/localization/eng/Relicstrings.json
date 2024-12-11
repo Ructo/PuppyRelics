@@ -24,7 +24,7 @@
     "NAME": "Bee's Knees",
     "FLAVOR": "What's so sweet about a bee's knees anyways? Oh, they carry the pollen that makes honey? You win this time.",
     "DESCRIPTIONS": [
-      "When you upgrade a card at a rest site, upgrade a second one randomly. If none are left to upgrade, heal #b3 HP."
+      "When you upgrade a card at a rest site, upgrade a second one randomly. If none are left to upgrade, heal #b30 HP."
     ]
   },
   "${ModID}:BlessingInDisguise": {
@@ -126,7 +126,7 @@
     "NAME": "Knuckle Down",
     "FLAVOR": "When things get rough, sometimes you just have to focus on your goals to make it to tomorrow.",
     "DESCRIPTIONS": [
-      "If you play #b3 #ySkills in a turn, remove a random debuff stack from yourself."
+      "If you play #b3 #ySkills in a turn, remove a random debuff from yourself."
     ]
   },
   "${ModID}:LousyRelic": {
@@ -165,6 +165,13 @@
       "At the start of your turn, select a card to #yExhaust. Gain [E] equal to its cost.",
       "Once per turn you can right click the relic to select a card to #yExhaust. Gain [E] equal to its cost."
       ]
+  },
+  "${ModID}:OneForTheRoad": {
+    "NAME": "One For The Road",
+    "FLAVOR": "Come on now, you can't just have one card when you got so many others just waiting to be drawn..",
+    "DESCRIPTIONS": [
+      "When you draw a power card, draw a card."
+    ]
   },
   "${ModID}:OneStone": {
     "NAME": "One Stone",
