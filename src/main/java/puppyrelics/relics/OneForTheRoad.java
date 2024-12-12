@@ -13,7 +13,7 @@ public class OneForTheRoad extends AbstractEasyClickRelic {
     public static final String ID = makeID("OneForTheRoad");
 
     public OneForTheRoad() {
-        super(ID, RelicTier.COMMON, LandingSound.FLAT);
+        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override
