@@ -1,12 +1,15 @@
 package puppyrelics.relics;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
-import com.megacrit.cardcrawl.actions.unique.GreedAction;
+import basemod.helpers.CardPowerTip;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDiscardAction;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import puppyrelics.cards.PirateRaidCard;
+import puppyrelics.cards.RatRaceCard;
 import puppyrelics.util.ProAudio;
 
 import static puppyrelics.ModFile.makeID;
@@ -14,29 +17,15 @@ import static puppyrelics.util.Wiz.playAudio;
 
 public class AgmensHat extends AbstractEasyClickRelic {
     public static final String ID = makeID("AgmensHat");
-    private static final int DAMAGE = 3;
-    private static final int GOLD_REWARD = 10;
+
+    private boolean gaveRaidThisCombat = false;
 
     public AgmensHat() {
-        super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
-    }
-
-    @Override
-    public void atTurnStart() {
-        flash();
-        addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-
-        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            if (!m.isDeadOrEscaped()) {
-                // Apply damage and grant gold if the monster is killed
-                addToBot(new GreedAction(m, new DamageInfo(AbstractDungeon.player, DAMAGE, DamageInfo.DamageType.THORNS), GOLD_REWARD));
-            }
-        }
-    }
-
-    @Override
-    public void onVictory() {
-        // No need to manually clear or track killed monsters; handled by GreedAction
+        super(ID, RelicTier.RARE, LandingSound.FLAT);
+        tips.clear();
+        tips.add(new PowerTip(name, description));
+        tips.add(new CardPowerTip(new PirateRaidCard()));
+        initializeTips();
     }
 
     @Override
@@ -45,11 +34,43 @@ public class AgmensHat extends AbstractEasyClickRelic {
     }
 
     @Override
+    public void atPreBattle() {
+        gaveRaidThisCombat = false;
+    }
+
+    @Override
+    public void onShuffle() {
+        if (isInCombat() && !gaveRaidThisCombat) {
+            flash();
+            PirateRaidCard raid = new PirateRaidCard();
+            // Prefer hand; if full, send to discard
+            if (AbstractDungeon.player.hand.size() < 10) {
+                addToBot(new MakeTempCardInHandAction(raid, 1, false));
+            } else {
+                addToBot(new MakeTempCardInDiscardAction(raid, 1));
+            }
+            gaveRaidThisCombat = true;
+        }
+    }
+
+    @Override
+    public void onVictory() {
+        gaveRaidThisCombat = false;
+    }
+
+    private boolean isInCombat() {
+        return AbstractDungeon.getCurrRoom() != null
+                && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT
+                && AbstractDungeon.getMonsters() != null
+                && !AbstractDungeon.getMonsters().areMonstersBasicallyDead();
+    }
+
+    @Override
     public AbstractRelic makeCopy() {
         return new AgmensHat();
     }
 
-    @Override
+@Override
     public void onRightClick() {
         playAudio(ProAudio.pirate);
     }

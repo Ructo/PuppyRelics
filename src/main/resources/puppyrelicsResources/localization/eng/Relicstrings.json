@@ -17,7 +17,14 @@
     "NAME": "Agmen's Hat",
     "FLAVOR": "Always be yourself, unless you can be a pirate. Then always be a pirate.",
     "DESCRIPTIONS": [
-      "At the start of your turn, deal #b3 damage to all enemies. If the damage kills an enemy, gain #y10 gold."
+      "The first time you #yShuffle your draw pile each combat, add a #yPirate #yRaid to your hand."
+    ]
+  },
+  "${ModID}:BabyAndBathwater": {
+    "NAME": "Baby And Bathwater",
+    "FLAVOR": "If you're going to throw out a good thing, you might as well throw out the bad too.",
+    "DESCRIPTIONS": [
+      "Whenever you exhaust a card, exhaust a random Curse or Status from anywhere. Does not trigger itself."
     ]
   },
   "${ModID}:BeesKnees": {
@@ -108,6 +115,13 @@
       "Whenever you enter a #y? Room, heal #b4 HP."
     ]
   },
+  "${ModID}:HoopJumper": {
+    "NAME": "Hoop Jumper",
+    "FLAVOR": "Is it worth jumping through this many hoops? Yes...?",
+    "DESCRIPTIONS": [
+      "Gain [E] when you complete a random set of 3 actions. A new set is chosen upon completion. Progress persists across combats."
+    ]
+  },
   "${ModID}:Hyperactivity": {
     "NAME": "Hyperactivity",
     "FLAVOR": "Sure, you're exhausted, but there's still a small burst of energy you can eke out.",
@@ -185,6 +199,13 @@
     "FLAVOR": "Climbing the corporate ladder is taxing, some say it's feels kind of Shammy",
     "DESCRIPTIONS": [
       "At the start of your turn, if you have no #yStatus cards in your hand, add a #yRat #yRace card to your hand."
+    ]
+  },
+  "${ModID}:ThatWhichWaits": {
+    "NAME": "That Which Waits",
+    "FLAVOR": "Sure, good things can come to those who wait... but also bad things can come to those who don't.",
+    "DESCRIPTIONS": [
+      "If you end your turn without playing an attack, deal 7 damage to a random enemy."
     ]
   },
   "${ModID}:TheBold": {

@@ -24,6 +24,7 @@ import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import puppyrelics.cards.PirateRaidCard;
 import puppyrelics.cards.RatRaceCard;
 import puppyrelics.relics.*;
 import puppyrelics.util.ProAudio;
@@ -185,6 +186,8 @@ public class ModFile implements
     public void receiveEditCards() {
         BaseMod.addCard(new RatRaceCard());
         UnlockTracker.unlockCard(RatRaceCard.ID);
+        BaseMod.addCard(new PirateRaidCard());
+        UnlockTracker.unlockCard(PirateRaidCard.ID);
     }
 
     @Override

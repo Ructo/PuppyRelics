@@ -21,7 +21,7 @@ public class RatRaceCard extends CustomCard {
     private static final int COST = 0;
 
     public RatRaceCard() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, AbstractCard.CardType.SKILL, AbstractCard.CardColor.COLORLESS, AbstractCard.CardRarity.SPECIAL, AbstractCard.CardTarget.SELF);
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.SELF);
         this.exhaust = true;
         this.isEthereal = true;
         baseMagicNumber = magicNumber = 1;

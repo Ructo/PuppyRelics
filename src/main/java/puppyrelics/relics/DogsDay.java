@@ -72,11 +72,6 @@ public class DogsDay extends AbstractEasyClickRelic {
 
     @Override
     public void onRightClick() {
-        if (toggle) {
-            playAudio(ProAudio.bark1);
-        } else {
-            playAudio(ProAudio.bark2);
-        }
-        toggle = !toggle;
+        playAudio(ProAudio.woof);
     }
 }

@@ -20,7 +20,7 @@ public class ThatWhichWaits extends AbstractEasyClickRelic {
     private boolean playedAttackThisTurn = false;
 
     public ThatWhichWaits() {
-        super(ID, RelicTier.COMMON, LandingSound.MAGICAL);
+        super(ID, RelicTier.COMMON, LandingSound.FLAT);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ThatWhichWaits extends AbstractEasyClickRelic {
 
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        playAudio(ProAudio.bell);
     }
 
     @Override

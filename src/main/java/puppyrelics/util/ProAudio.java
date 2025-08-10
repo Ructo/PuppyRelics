@@ -31,7 +31,10 @@ public enum ProAudio {
     welp,
     stones1,
     stones2,
-    stones3
+    stones3,
+    woof,
+    bell
+
 
     /*
     Add any audio you add to your files here!
