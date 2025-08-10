@@ -119,7 +119,7 @@
     "NAME": "Icing On The Potion",
     "FLAVOR": "We're not sure who put icing on this potion, but something about the flavor DRAWS you in.",
     "DESCRIPTIONS": [
-      "Whenever you drink a potion, draw a card. If you aren't in combat, do so next combat."
+      "When you drink or discard a potion, draw 1 card. If outside combat, draw all owed cards at the start of your next combat."
     ]
   },
   "${ModID}:KnuckleDown": {

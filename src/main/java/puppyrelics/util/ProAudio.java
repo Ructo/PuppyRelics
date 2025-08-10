@@ -29,7 +29,9 @@ public enum ProAudio {
     blessing,
     sureaboutthat,
     welp,
-
+    stones1,
+    stones2,
+    stones3
 
     /*
     Add any audio you add to your files here!

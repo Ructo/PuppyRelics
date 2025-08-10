@@ -12,6 +12,7 @@ import puppyrelics.util.ProAudio;
 
 public class UnturnedStone extends AbstractEasyClickRelic {
     public static final String ID = makeID("UnturnedStone");
+    private int soundCounter = 0;
 
     public UnturnedStone() {
         super(ID, RelicTier.UNCOMMON, LandingSound.FLAT);
@@ -24,8 +25,11 @@ public class UnturnedStone extends AbstractEasyClickRelic {
 
     private void triggerEffect() {
         flash();
-        AbstractDungeon.actionManager.addToBottom(new DamageAllEnemiesAction(
-                AbstractDungeon.player, 8, DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
+        addToBot(new DamageAllEnemiesAction(
+                null,
+                DamageInfo.createDamageMatrix(8, true), // Flat 8 to all enemies
+                DamageInfo.DamageType.THORNS,
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
     }
 
     @Override
@@ -40,6 +44,18 @@ public class UnturnedStone extends AbstractEasyClickRelic {
 
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.squeak);
+        switch (soundCounter) {
+            case 0:
+                playAudio(ProAudio.stones1); // Replace with your actual sound key
+                break;
+            case 1:
+                playAudio(ProAudio.stones2); // Replace with your actual sound key
+                break;
+            case 2:
+                playAudio(ProAudio.stones3); // Replace with your actual sound key
+                break;
+            default:
+                break;
+        }
     }
 }
