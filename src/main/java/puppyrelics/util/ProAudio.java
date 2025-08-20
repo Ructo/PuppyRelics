@@ -1,45 +1,40 @@
 package puppyrelics.util;
 
 public enum ProAudio {
-    squeak,
-    goat,
-    potion1,
-    potion2,
-    potion3,
-    ufo,
-    sparkle,
-    page,
-    fairy,
+    bark1,
+    bark2,
+    bell,
+    blessing,
+    bubble,
+    cash,
     cat1,
     cat2,
     cat3,
-    meowman,
-    tough,
-    bubble,
-    pirate,
-    tcpower,
     devil,
-    bark1,
-    bark2,
-    ninja,
-    heavyblunt,
+    fairy,
+    goat,
     grass,
-    cash,
-    yippee,
-    blessing,
-    sureaboutthat,
-    welp,
+    heavyblunt,
+    kazoo,
+    meowman,
+    ninja,
+    page,
+    pirate,
+    potion1,
+    potion2,
+    potion3,
+    rain,
+    sparkle,
+    splash,
+    squeak,
     stones1,
     stones2,
     stones3,
+    sureaboutthat,
+    tcpower,
+    tough,
+    ufo,
+    welp,
     woof,
-    bell
-
-
-    /*
-    Add any audio you add to your files here!
-    For example, if you add "todomodResources/audio/boing.ogg", you'd add it here as BOING
-    Then, you can use playAudio(ProAudio.BOING) from Wiz to play it.
-    */
-
+    yippee
 }

@@ -24,7 +24,7 @@
     "NAME": "Baby And Bathwater",
     "FLAVOR": "If you're going to throw out a good thing, you might as well throw out the bad too.",
     "DESCRIPTIONS": [
-      "Whenever you exhaust a card, exhaust a random Curse or Status from anywhere. Does not trigger itself."
+      "Once per turn, when a non-Curse, non-Status card is #yExhausted, exhaust a random #yStatus from anywhere."
     ]
   },
   "${ModID}:BeesKnees": {
@@ -119,7 +119,7 @@
     "NAME": "Hoop Jumper",
     "FLAVOR": "Is it worth jumping through this many hoops? Yes...?",
     "DESCRIPTIONS": [
-      "Gain [E] when you complete a random set of 3 actions. A new set is chosen upon completion. Progress persists across combats."
+      "Gain [E] when you play a random set of 3 card types. A new set is chosen upon completion. Progress persists across combats."
     ]
   },
   "${ModID}:Hyperactivity": {
@@ -134,6 +134,13 @@
     "FLAVOR": "We're not sure who put icing on this potion, but something about the flavor DRAWS you in.",
     "DESCRIPTIONS": [
       "When you drink or discard a potion, draw 1 card. If outside combat, draw all owed cards at the start of your next combat."
+    ]
+  },
+  "${ModID}:Kazoo": {
+    "NAME": "Kazoo",
+    "FLAVOR": "For when you really want to make some noise!",
+    "DESCRIPTIONS": [
+      "Right click me and you will get noises!"
     ]
   },
   "${ModID}:KnuckleDown": {
@@ -227,6 +234,13 @@
     "FLAVOR": "There's always the ability to deal damage... you just gotta look for it sometimes.",
     "DESCRIPTIONS": [
       "Whenever you shuffle your draw pile, deal #b8 damage to all enemies."
+    ]
+  },
+  "${ModID}:WeatheredUmbrella": {
+    "NAME": "Weathered Umbrella",
+    "FLAVOR": "It keeps you from feeling under the weather most of the time. It tries its best despite its age.",
+    "DESCRIPTIONS": [
+      "Whenever you gain a debuff, prevent the next debuff."
     ]
   }
 }

@@ -6,7 +6,7 @@
   },
   "${ModID}:PirateRaidCard": {
     "NAME": "Pirate Raid",
-    "DESCRIPTION": "Ethereal. NL Deal !D! damage to each enemy. NL Steal 5 gold.",
-    "UPGRADE_DESCRIPTION": "Ethereal. NL Deal !D! damage to each enemy. NL Steal 5 gold."
+    "DESCRIPTION": "Ethereal. NL Deal !D! damage to each enemy. NL Steal 5 gold. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Deal !D! damage to each enemy. NL Steal 5 gold. NL Exhaust."
   }
 }

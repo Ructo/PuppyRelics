@@ -22,13 +22,14 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import puppyrelics.cards.PirateRaidCard;
 import puppyrelics.cards.RatRaceCard;
 import puppyrelics.relics.*;
 import puppyrelics.util.ProAudio;
-
+import basemod.interfaces.PostDungeonInitializeSubscriber;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
@@ -42,7 +43,8 @@ public class ModFile implements
         EditKeywordsSubscriber,
         EditCharactersSubscriber,
         AddAudioSubscriber,
-        PostInitializeSubscriber {
+        PostInitializeSubscriber,
+        PostDungeonInitializeSubscriber {
 
     public static final String modID = "puppyrelics";
     public static final String FILE_NAME = "NinjaPuppyConfig";
@@ -78,10 +80,20 @@ public class ModFile implements
     private static final String CARD_ENERGY_L = makeImagePath("1024/energy.png");
     private static final String CHARSELECT_BUTTON = makeImagePath("charSelect/charButton.png");
     private static final String CHARSELECT_PORTRAIT = makeImagePath("charSelect/charBG.png");
+    public static final String SOUND_RELIC_ENABLED = "soundRelicEnabled";
+    public static final String SOUND_RELIC_MODE    = "soundRelicMode";
+    public static final String SOUND_RELIC_PICK    = "soundRelicPick";
 
+
+    public enum SoundMode { SPECIFIC, RANDOM_CLICK, RANDOM_ROOM, RANDOM_ACT, RANDOM_RUN }
+
+    public static boolean soundRelicEnabled = false;
+    public static SoundMode soundRelicMode = SoundMode.SPECIFIC;
+    public static String soundRelicPick = ProAudio.squeak.name();
     public static Settings.GameLanguage[] SupportedLanguages = {
             Settings.GameLanguage.ENG,
     };
+
 
     private String getLangString() {
         for (Settings.GameLanguage lang : SupportedLanguages) {
@@ -99,7 +111,9 @@ public class ModFile implements
         defaultSettings.setProperty(LEGACY_MODE, Boolean.toString(legacyMode));
         defaultSettings.setProperty(MOUSE_RADIUS, String.valueOf(mouseRadius));
         defaultSettings.setProperty(MONEY_BUSH_LEGACY_MODE, Boolean.toString(moneyBushLegacyMode));
-
+        defaultSettings.setProperty(SOUND_RELIC_ENABLED, Boolean.toString(soundRelicEnabled));
+        defaultSettings.setProperty(SOUND_RELIC_MODE, soundRelicMode.name());
+        defaultSettings.setProperty(SOUND_RELIC_PICK, soundRelicPick);
 
         try {
             LOConfig = new SpireConfig(modID, FILE_NAME, defaultSettings);
@@ -114,6 +128,10 @@ public class ModFile implements
             legacyMode = LOConfig.getBool(LEGACY_MODE);
             mouseRadius = LOConfig.getInt(MOUSE_RADIUS);
             moneyBushLegacyMode = LOConfig.getBool(MONEY_BUSH_LEGACY_MODE);
+
+            soundRelicEnabled = LOConfig.getBool(SOUND_RELIC_ENABLED);
+            soundRelicMode = SoundMode.valueOf(LOConfig.getString(SOUND_RELIC_MODE));
+            soundRelicPick = LOConfig.getString(SOUND_RELIC_PICK);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,6 +145,11 @@ public class ModFile implements
             LOConfig.setBool(LEGACY_MODE, legacyMode);
             LOConfig.setInt(MOUSE_RADIUS, mouseRadius);
             LOConfig.setBool(MONEY_BUSH_LEGACY_MODE, moneyBushLegacyMode);
+
+            LOConfig.setBool(SOUND_RELIC_ENABLED, soundRelicEnabled);
+            LOConfig.setString(SOUND_RELIC_MODE, soundRelicMode.name());
+            LOConfig.setString(SOUND_RELIC_PICK, soundRelicPick);
+
             LOConfig.save();
         } catch (IOException e) {
             e.printStackTrace();
@@ -155,7 +178,58 @@ public class ModFile implements
     public static String makeCardPath(String resourcePath) {
         return modID + "Resources/images/cards/" + resourcePath;
     }
+    private static class ConfigDropdown implements basemod.IUIElement,
+            com.megacrit.cardcrawl.screens.options.DropdownMenuListener {
 
+        private final String label;
+        private final float x, y;
+        private final com.megacrit.cardcrawl.screens.options.DropdownMenu menu;
+        private final java.util.function.IntConsumer onChange;
+        private boolean enabled = true;
+        private boolean visible = true;
+
+        ConfigDropdown(String label, float x, float y, String[] items, int selectedIdx,
+                       java.util.function.IntConsumer onChange) {
+            this.label = label;
+            this.x = x;
+            this.y = y;
+            this.onChange = onChange;
+
+            java.util.ArrayList<String> options =
+                    new java.util.ArrayList<>(java.util.Arrays.asList(items));
+            this.menu = new com.megacrit.cardcrawl.screens.options.DropdownMenu(
+                    this, options,
+                    com.megacrit.cardcrawl.helpers.FontHelper.cardTitleFont,
+                    com.megacrit.cardcrawl.core.Settings.CREAM_COLOR
+            );
+            this.menu.setSelectedIndex(Math.max(0, Math.min(selectedIdx, options.size() - 1)));
+        }
+
+        public void setEnabled(boolean v) { this.enabled = v; }
+        public void setVisible(boolean v) { this.visible = v; }
+
+        @Override
+        public void render(com.badlogic.gdx.graphics.g2d.SpriteBatch sb) {
+            if (!visible) return;
+            // tighter label spacing
+            com.megacrit.cardcrawl.helpers.FontHelper.renderFontLeft(
+                    sb, com.megacrit.cardcrawl.helpers.FontHelper.charDescFont,
+                    label, x, y + 28f,
+                    com.megacrit.cardcrawl.core.Settings.CREAM_COLOR
+            );
+            menu.render(sb, x, y);
+        }
+
+        @Override public void update() { if (visible && enabled) menu.update(); }
+        @Override public int renderLayer() { return 0; }
+        @Override public int updateOrder() { return 0; }
+
+        @Override
+        public void changedSelectionTo(com.megacrit.cardcrawl.screens.options.DropdownMenu menu,
+                                       int index, String option) {
+            if (onChange != null) onChange.accept(index);
+        }
+    }
     public static void initialize() {
         ModFile thismod = new ModFile();
     }
@@ -220,7 +294,21 @@ public class ModFile implements
             }
         }
     }
+    @Override
+    public void receivePostDungeonInitialize() {
+        if (!soundRelicEnabled || AbstractDungeon.player == null) return;
 
+        if (!AbstractDungeon.player.hasRelic(puppyrelics.relics.Kazoo.ID)) {
+            AbstractDungeon.player.relics.add(new puppyrelics.relics.Kazoo());
+            AbstractDungeon.player.reorganizeRelics();
+        }
+        if (soundRelicMode == SoundMode.RANDOM_RUN) {
+            AbstractRelic r = AbstractDungeon.player.getRelic(puppyrelics.relics.Kazoo.ID);
+            if (r instanceof puppyrelics.relics.Kazoo) {
+                ((puppyrelics.relics.Kazoo) r).rollRandom();
+            }
+        }
+    }
     @Override
     public void receivePostInitialize() {
         // Ensure configuration is loaded before initializing the UI
@@ -241,7 +329,8 @@ public class ModFile implements
                 FontHelper.charDescFont,
                 legacyMode,
                 settingsPanel,
-                (label) -> {},
+                (label) -> {
+                },
                 (button) -> {
                     legacyMode = button.enabled;
 
@@ -275,7 +364,8 @@ public class ModFile implements
                 FontHelper.charDescFont,
                 moneyBushLegacyMode,
                 settingsPanel,
-                (label) -> {},
+                (label) -> {
+                },
                 (button) -> {
                     moneyBushLegacyMode = button.enabled;
 
@@ -302,6 +392,73 @@ public class ModFile implements
         );
         settingsPanel.addUIElement(legacyMoneyBushToggleButton);
 
+        final float yToggle = 650f;
+        final float yMode   = 600f;
+        final float ySound  = 550f;
+
+// SOUND dropdown (all ProAudio values)
+        String[] soundLabels = java.util.Arrays.stream(ProAudio.values())
+                .map(Enum::name)
+                .toArray(String[]::new);
+        int initialSoundIdx = Math.max(0, java.util.Arrays.asList(soundLabels).indexOf(soundRelicPick));
+
+        final ConfigDropdown soundDrop = new ConfigDropdown(
+                "Sound", 350.0f, ySound, soundLabels, initialSoundIdx,
+                (idx) -> {
+                    soundRelicPick = soundLabels[idx];
+                    try {
+                        LOConfig.setString(SOUND_RELIC_PICK, soundRelicPick);
+                        LOConfig.save();
+                    } catch (Exception e) { e.printStackTrace(); }
+                }
+        );
+        settingsPanel.addUIElement(soundDrop);
+
+// MODE dropdown
+        String[] modeLabels = new String[]{
+                "Specific sound",
+                "Random — every click",
+                "Random — every room",
+                "Random — new act",
+                "Random — every run"
+        };
+        final ConfigDropdown modeDrop = new ConfigDropdown(
+                "Mode", 350.0f, yMode, modeLabels, soundRelicMode.ordinal(),
+                (idx) -> {
+                    soundRelicMode = SoundMode.values()[idx];
+                    // show Sound picker only in SPECIFIC mode
+                    soundDrop.setVisible(soundRelicEnabled && soundRelicMode == SoundMode.SPECIFIC);
+                    try {
+                        LOConfig.setString(SOUND_RELIC_MODE, soundRelicMode.name());
+                        LOConfig.save();
+                    } catch (Exception e) { e.printStackTrace(); }
+                }
+        );
+        settingsPanel.addUIElement(modeDrop);
+
+// initial visibility
+        modeDrop.setVisible(soundRelicEnabled);
+        soundDrop.setVisible(soundRelicEnabled && soundRelicMode == SoundMode.SPECIFIC);
+
+// TOGGLE (after dropdowns so it can reference them)
+        ModLabeledToggleButton kazooToggle = new ModLabeledToggleButton(
+                "Enable Kazoo Relic",
+                350.0f, yToggle,
+                Settings.CREAM_COLOR, FontHelper.charDescFont,
+                soundRelicEnabled, settingsPanel,
+                (label) -> {},
+                (button) -> {
+                    soundRelicEnabled = button.enabled;
+                    try {
+                        LOConfig.setBool(SOUND_RELIC_ENABLED, soundRelicEnabled);
+                        LOConfig.save();
+                    } catch (Exception e) { e.printStackTrace(); }
+                    // show/hide both dropdowns with the checkbox
+                    modeDrop.setVisible(soundRelicEnabled);
+                    soundDrop.setVisible(soundRelicEnabled && soundRelicMode == SoundMode.SPECIFIC);
+                }
+        );
+        settingsPanel.addUIElement(kazooToggle);
 
         Texture badgeTexture = new Texture(Gdx.files.internal("puppyrelicsResources/images/ui/badge.png"));
         BaseMod.registerModBadge(badgeTexture, "Puppy Relics", "Ninja Puppy", "A collection of relics by NinjaPuppy, some are based on friends, some are idioms. I like to jokingly call it: Idioms and Idiots, with love.", settingsPanel);
@@ -324,7 +481,6 @@ public class ModFile implements
             }
         });
     }
-
     private boolean shouldGlowRed(AbstractCard card) {
         // Ensure that the player exists and has the BurningBridge relic
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BurningBridge.ID)) {
@@ -336,5 +492,4 @@ public class ModFile implements
         }
         return false;
     }
-
 }

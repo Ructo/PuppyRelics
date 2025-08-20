@@ -22,7 +22,8 @@ public class ThatWhichWaits extends AbstractEasyClickRelic {
     public ThatWhichWaits() {
         super(ID, RelicTier.COMMON, LandingSound.FLAT);
     }
-
+    private long lastClickTime = 0;
+    private static final long COOLDOWN_MS = 4000;
     @Override
     public void atTurnStart() {
         playedAttackThisTurn = false;
@@ -58,7 +59,11 @@ public class ThatWhichWaits extends AbstractEasyClickRelic {
 
     @Override
     public void onRightClick() {
-        playAudio(ProAudio.bell);
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime >= COOLDOWN_MS) {
+            playAudio(ProAudio.bell);
+            lastClickTime = currentTime;
+        }
     }
 
     @Override
