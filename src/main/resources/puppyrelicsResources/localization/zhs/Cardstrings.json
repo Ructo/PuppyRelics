@@ -1,0 +1,12 @@
+{
+  "${ModID}:RatRaceCard": {
+    "NAME": "Rat Race",
+    "DESCRIPTION": "Ethereal. NL Gain [E]. NL Add a Wound to your draw pile. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Gain [E] [E]. NL Add a Wound to your draw pile. NL Exhaust."
+  },
+  "${ModID}:PirateRaidCard": {
+    "NAME": "Pirate Raid",
+    "DESCRIPTION": "Ethereal. NL Deal !D! damage to each enemy. NL Steal 5 gold. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Deal !D! damage to each enemy. NL Steal 5 gold. NL Exhaust."
+  }
+}

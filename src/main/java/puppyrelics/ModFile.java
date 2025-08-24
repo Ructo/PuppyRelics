@@ -33,6 +33,10 @@ import basemod.interfaces.PostDungeonInitializeSubscriber;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.UIStrings;
+
+
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @SpireInitializer
@@ -63,6 +67,11 @@ public class ModFile implements
     public static String makeID(String idText) {
         return modID + ":" + idText;
     }
+
+
+    private static UIStrings uiStrings;
+    private static String[] TEXT;
+
 
     public static Color characterColor = new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
 
@@ -114,6 +123,7 @@ public class ModFile implements
         defaultSettings.setProperty(SOUND_RELIC_ENABLED, Boolean.toString(soundRelicEnabled));
         defaultSettings.setProperty(SOUND_RELIC_MODE, soundRelicMode.name());
         defaultSettings.setProperty(SOUND_RELIC_PICK, soundRelicPick);
+
 
         try {
             LOConfig = new SpireConfig(modID, FILE_NAME, defaultSettings);
@@ -309,9 +319,14 @@ public class ModFile implements
             }
         }
     }
+
     @Override
     public void receivePostInitialize() {
-        // Ensure configuration is loaded before initializing the UI
+        uiStrings = CardCrawlGame.languagePack.getUIString("puppyrelics:ModConfig");
+        if (uiStrings != null && uiStrings.TEXT != null) {
+            TEXT = uiStrings.TEXT;
+        }
+
         loadConfig();
         try {
             legacyMode = LOConfig.getBool(LEGACY_MODE);
@@ -322,7 +337,7 @@ public class ModFile implements
 
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton legacyToggleButton = new ModLabeledToggleButton(
-                "Enable Legacy GOAT Mode",
+                TEXT[0],
                 350.0f,
                 750.0f,
                 Settings.CREAM_COLOR,
@@ -357,7 +372,7 @@ public class ModFile implements
         );
         settingsPanel.addUIElement(legacyToggleButton);
         ModLabeledToggleButton legacyMoneyBushToggleButton = new ModLabeledToggleButton(
-                "Enable Legacy MoneyBush Mode",
+                TEXT[1],
                 350.0f,
                 700.0f, // Adjust position
                 Settings.CREAM_COLOR,
@@ -393,8 +408,8 @@ public class ModFile implements
         settingsPanel.addUIElement(legacyMoneyBushToggleButton);
 
         final float yToggle = 650f;
-        final float yMode   = 600f;
-        final float ySound  = 550f;
+        final float yMode   = 595f* Settings.scale;
+        final float ySound  = 550f* Settings.scale;
 
 // SOUND dropdown (all ProAudio values)
         String[] soundLabels = java.util.Arrays.stream(ProAudio.values())
@@ -403,7 +418,7 @@ public class ModFile implements
         int initialSoundIdx = Math.max(0, java.util.Arrays.asList(soundLabels).indexOf(soundRelicPick));
 
         final ConfigDropdown soundDrop = new ConfigDropdown(
-                "Sound", 350.0f, ySound, soundLabels, initialSoundIdx,
+                TEXT[2], 350.0f* Settings.scale, ySound, soundLabels, initialSoundIdx,
                 (idx) -> {
                     soundRelicPick = soundLabels[idx];
                     try {
@@ -416,14 +431,14 @@ public class ModFile implements
 
 // MODE dropdown
         String[] modeLabels = new String[]{
-                "Specific sound",
-                "Random — every click",
-                "Random — every room",
-                "Random — new act",
-                "Random — every run"
+                TEXT[4], // Specific sound
+                TEXT[5], // Random — every click
+                TEXT[6], // Random — every room
+                TEXT[7], // Random — new act
+                TEXT[8]  // Random — every run
         };
         final ConfigDropdown modeDrop = new ConfigDropdown(
-                "Mode", 350.0f, yMode, modeLabels, soundRelicMode.ordinal(),
+                TEXT[3], 350.0f* Settings.scale, yMode, modeLabels, soundRelicMode.ordinal(),
                 (idx) -> {
                     soundRelicMode = SoundMode.values()[idx];
                     // show Sound picker only in SPECIFIC mode
@@ -442,7 +457,7 @@ public class ModFile implements
 
 // TOGGLE (after dropdowns so it can reference them)
         ModLabeledToggleButton kazooToggle = new ModLabeledToggleButton(
-                "Enable Kazoo Relic",
+                TEXT[9],
                 350.0f, yToggle,
                 Settings.CREAM_COLOR, FontHelper.charDescFont,
                 soundRelicEnabled, settingsPanel,
@@ -461,8 +476,13 @@ public class ModFile implements
         settingsPanel.addUIElement(kazooToggle);
 
         Texture badgeTexture = new Texture(Gdx.files.internal("puppyrelicsResources/images/ui/badge.png"));
-        BaseMod.registerModBadge(badgeTexture, "Puppy Relics", "Ninja Puppy", "A collection of relics by NinjaPuppy, some are based on friends, some are idioms. I like to jokingly call it: Idioms and Idiots, with love.", settingsPanel);
-
+        BaseMod.registerModBadge(
+                badgeTexture,
+                "Puppy Relics",
+                "Ninja Puppy",
+                TEXT[10], // now the description
+                settingsPanel
+        );
         // Register the global glow logic for cards with the BurningBridge relic
         CardBorderGlowManager.addGlowInfo(new CardBorderGlowManager.GlowInfo() {
             @Override

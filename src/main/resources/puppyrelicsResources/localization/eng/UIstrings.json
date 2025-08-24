@@ -1,7 +1,17 @@
 {
-  "ConfigMenuText": {
+  "puppyrelics:ModConfig": {
     "TEXT": [
-      "Use Legacy NikTheGOAT"
+      "Enable Legacy GOAT Relic Mode",
+      "Enable Legacy Money Bush Relic Mode",
+      "Sound",
+      "Mode",
+      "Specific sound",
+      "Random — every click",
+      "Random — every room",
+      "Random — new act",
+      "Random — every run",
+      "Enable Kazoo Relic",
+      "A collection of relics by NinjaPuppy—some based on friends, some on idioms. I jokingly call it: Idioms and Idiots, with love."
     ]
   }
 }

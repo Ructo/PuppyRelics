@@ -25,15 +25,7 @@ public class BeesKnees extends AbstractEasyClickRelic implements BetterOnSmithRe
 
     public void betterOnSmith(AbstractCard abstractCard) {
         flash();
-        upgradeSelectedCard(abstractCard);
         upgradeRandomCard(abstractCard);
-    }
-
-    private void upgradeSelectedCard(AbstractCard cardToUpgrade) {
-        cardToUpgrade.upgrade();
-        AbstractDungeon.player.bottledCardUpgradeCheck(cardToUpgrade);
-        AbstractDungeon.topLevelEffects.add(new ShowCardBrieflyEffect(cardToUpgrade.makeStatEquivalentCopy()));
-        AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect(cardToUpgrade.current_x, cardToUpgrade.current_y));
     }
 
     private void upgradeRandomCard(AbstractCard selectedCard) {

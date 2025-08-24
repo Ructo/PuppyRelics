@@ -1,0 +1,9 @@
+[
+  {
+    "PROPER_NAME": "Bloody",
+    "NAMES": [
+      "alternatecost"
+    ],
+    "DESCRIPTION": "This card costs HP equal to the missing energy then exhausts."
+  }
+]
